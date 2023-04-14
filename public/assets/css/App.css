@@ -1,0 +1,60 @@
+:root{
+    --color-primary:#ef5e4e;
+
+    --distance-primary:50px;
+    --padding-primary: var(--distance-primary);
+    --margin-primary: var(--distance-primary);
+    --font-family-primary: 'Poppins', sans-serif;
+    --font-weight-bold:900;
+    --font-weight-normal:400;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+body
+{
+    height: 1000px;
+}
+
+.hero
+{
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding-primary);
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-primary);
+}
+.hero-title
+{
+    display:flex;
+    flex-direction: column;
+    padding: calc(var(--padding-primary)/2);
+    align-items: center;
+    justify-content: center;
+}
+.hero-title-principale
+{
+    font-size: 20px;
+}
+.hero-search
+{
+    border-radius: 0.5px solid black;
+}
+.hero-search-3
+{
+    display: flex;
+}
+.hero-search-button
+{
+    background-color: var(--color-primary);
+    margin: calc(var(--margin-primary)/4);
+}
+.margin-0
+{
+    margin-bottom: calc(var(--margin-primary)/4);
+}
+.margin-1 ,.margin-2
+{
+    margin-right: calc(var(--margin-primary)/4);
+}

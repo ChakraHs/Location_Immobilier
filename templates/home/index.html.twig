@@ -1,20 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/my_project_symfony/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/my_project_symfony/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container">
+        <div class="hero"> 
+            <div class="hero-title">
+                <div class="hero-title-principale">
+                    Trouver  le bien qui reprendre à votre projet de location Immobilière
+                </div>
+            </div>
+            <div class="hero-search">
+                <form action="" method="get">
+                    <div class="hero-search-input margin-0">
+                        <input class="form-control form-control-sm" type="text" name="ville" placeholder="ville" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="hero-search-3">
+                        <div class="hero-search-input second-search margin-1">
+                            <input class="form-control form-control-sm" type="text" name="Type de propriete" placeholder="Type de propriete" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="hero-search-input second-search margin-2">
+                            <input class="form-control form-control-sm" type="text" name="Prix" placeholder="Prix" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="hero-search-input second-search margin-3">
+                            <input class="form-control form-control-sm" type="text" name="chambreaBains" placeholder="Chambrea & Bains" aria-label=".form-control-sm example">
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 mx-auto hero-search-button">
+                        <button class="btn " type="button"> Chercher</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
