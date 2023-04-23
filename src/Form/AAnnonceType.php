@@ -2,30 +2,31 @@
 
 namespace App\Form;
 
-use App\Entity\Annonce;
+use App\Entity\AAnnonce;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AnnonceType extends AbstractType
+class AAnnonceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('A_Prix')
-            ->add('A_Ville')
-            ->add('A_Rue')
-            ->add('A_Num_Immo')
-            ->add('A_Etat')
-            ->add('A_Traite')
-            ->add('imageImmo')
+            ->add('aprix')
+            ->add('aville')
+            ->add('arue')
+            ->add('anumimmo')
+            ->add('aetat')
+            ->add('atraite')
+            ->add('aproprietaire')
+            ->add('acategory')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Annonce::class,
+            'data_class' => AAnnonce::class,
         ]);
     }
 }
