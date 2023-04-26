@@ -11,23 +11,23 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
 
-body
+/*
+.hero1
 {
-    height: 1000px;
-}
-
-.hero
-{
+    background-image: url(../img/backyard-water-contemporary-architecture-sky.jpg) }});
+    margin: 0px;
+    background-repeat: no-repeat;
+    background-position :center;
+    background-size:cover;
     display: flex;
     flex-direction: column;
     padding: var(--padding-primary);
     align-items: center;
     justify-content: center;
     font-family: var(--font-family-primary);
-    background: url(../../assets/img/backyard-water-contemporary-architecture-sky.jpg) no-repeat top right;
-    width: auto;
-    height: auto;
-}
+    width:auto;
+    min-height:80vh;
+}*/
 .hero-title
 {
     display:flex;
@@ -47,6 +47,7 @@ body
 .hero-search-3
 {
     display: flex;
+    margin-bottom: calc(var(--margin-primary)/4);
 }
 .hero-search-button
 {

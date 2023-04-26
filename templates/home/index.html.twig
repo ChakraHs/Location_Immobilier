@@ -1,10 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
-
 {% block body %}
-    <div class="container">
-        <div class="hero"> 
+    <div class='container-fluid' style='padding:none;background-color: white;'>
+        <div 
+            class="hero1" 
+            style=' background-image: url({{ asset('assets/img/backyard-water-contemporary-architecture-sky.jpg') }});
+                    margin: 0px;
+                    background-repeat: no-repeat;
+                    background-position :center;
+                    background-size:cover;
+                    display: flex;
+                    flex-direction: column;
+                    padding: var(--padding-primary);
+                    align-items: center;
+                    justify-content: center;
+                    font-family: var(--font-family-primary);
+                    width:auto;
+                    min-height:80vh;
+                    ' > 
             <div class="hero-title">
                 <div class="hero-title-principale">
                     Trouver  le bien qui reprendre à votre projet de location Immobilière
