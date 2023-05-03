@@ -3,9 +3,29 @@
 {% block title %}AAnnonce index{% endblock %}
 
 {% block body %}
-    <h1>AAnnonce index</h1>
-    <div {{ react_component('Card/Card') }}></div>
-    <div {{ react_component('MyComponent', { 'fullName': 'ismail' }) }}></div>
+<div class='container-fluid' style='padding:none;background-color: white;'>
+    <div class="Annonce-items">
+        {% for a_annonce in a_annonces %}
+            {% for category in categorys %}
+                {% if category.id == a_annonce.acategory.id %}
+                    <div {{ react_component('Card/Card',
+                        {   'Category': category.catnom , 
+                            'Prix': a_annonce.aprix , 
+                            'Ville':a_annonce.aville , 
+                            'Rue':a_annonce.arue , 
+                            'NumImmo':a_annonce.anumimmo ,
+                            'Bedrooms':a_annonce.bedrooms ,
+                            'Bathrooms':a_annonce.bathrooms,
+                            'Surface':a_annonce.Surface
+                         }) }}></div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -43,4 +63,5 @@
     </table>
 
     <a href="{{ path('app_annonce_new') }}">Create new</a>
+</div>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\AAnnonce;
 use App\Form\AAnnonceType;
 use App\Repository\AAnnonceRepository;
+use App\Repository\ACategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AAnnonceController extends AbstractController
 {
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
-    public function index(AAnnonceRepository $aAnnonceRepository): Response
+    public function index(AAnnonceRepository $aAnnonceRepository , ACategoryRepository $aCategoryRepository): Response
     {
         return $this->render('a_annonce/index.html.twig', [
             'a_annonces' => $aAnnonceRepository->findAll(),
+            'categorys' => $aCategoryRepository->findAll(),
         ]);
     }
 

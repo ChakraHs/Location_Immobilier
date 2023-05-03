@@ -47,6 +47,15 @@ class AAnnonce
     #[ORM\OneToMany(mappedBy: 'rannonce', targetEntity: AReservation::class)]
     private Collection $aReservations;
 
+    #[ORM\Column]
+    private ?int $bedrooms = null;
+
+    #[ORM\Column]
+    private ?int $bathrooms = null;
+
+    #[ORM\Column]
+    private ?int $Surface = null;
+
     public function __construct()
     {
         $this->aImages = new ArrayCollection();
@@ -210,6 +219,42 @@ class AAnnonce
                 $aReservation->setRannonce(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBedrooms(): ?int
+    {
+        return $this->bedrooms;
+    }
+
+    public function setBedrooms(int $bedrooms): self
+    {
+        $this->bedrooms = $bedrooms;
+
+        return $this;
+    }
+
+    public function getBathrooms(): ?int
+    {
+        return $this->bathrooms;
+    }
+
+    public function setBathrooms(int $bathrooms): self
+    {
+        $this->bathrooms = $bathrooms;
+
+        return $this;
+    }
+
+    public function getSurface(): ?int
+    {
+        return $this->Surface;
+    }
+
+    public function setSurface(int $Surface): self
+    {
+        $this->Surface = $Surface;
 
         return $this;
     }

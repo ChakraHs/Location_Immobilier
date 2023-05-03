@@ -1,15 +1,25 @@
 :root{
     --color-primary:#ef5e4e;
+    --color-dark:#b9b0ae;
 
     --distance-primary:50px;
     --padding-primary: var(--distance-primary);
     --margin-primary: var(--distance-primary);
+    --border-radius-primary: calc(var(--distance-primary)/2);
+    --padding-secondary: calc(var(--distance-primary)/2);
+    --margin-secondary:calc(var(--distance-primary)/2);
+    --border-radius-secondary:calc(var(--distance-primary)/4);
     --font-family-primary: 'Poppins', sans-serif;
     --font-weight-bold:900;
     --font-weight-normal:400;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+body
+{
+    background-color: white;
+}
 
 /*
 .hero1
@@ -61,4 +71,11 @@
 .margin-1 ,.margin-2
 {
     margin-right: calc(var(--margin-primary)/4);
+}
+.Annonce-items
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
