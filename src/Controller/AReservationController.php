@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\AReservation;
 use App\Form\AReservationType;
 use App\Repository\AReservationRepository;
+use App\Repository\AAnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AReservationController extends AbstractController
 {
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
-    public function index(AReservationRepository $aReservationRepository): Response
+    public function index(AReservationRepository $aReservationRepository,AAnnonceRepository $aAnnonceRepository): Response
     {
         return $this->render('a_reservation/index.html.twig', [
             'a_reservations' => $aReservationRepository->findAll(),
+            'a_annonces'=> $aAnnonceRepository->findAll()
         ]);
     }
 

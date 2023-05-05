@@ -2,17 +2,56 @@
 
 {% block title %}AReservation index{% endblock %}
 
-{% block body %}
-    <h1>AReservation index</h1>
+{% block nav %}
+                <div class="collapse navbar-collapse" id="navbarScroll" style="width:1200px;display:flex; align-item:flex-start;justify-content:flex-start;">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link p-2 p-lg-3" href="{{ path('app_reservation_index') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-2 p-lg-3" href="{{ path('app_reservation_index') }}">Mes locations</a>
+                        </li>
+                        <li class="nav-item" style="margin-right:600px;">
+                            <a class="nav-link p-2 p-lg-3" href="{{ path('app_annonce_index') }}">Mon compte</a>
+                        </li>
+                        {#<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle p-2 p-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Link
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Se connecter </a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        #}
+                        <li>
+                            <div class="hero-search-button!" style="background-color:red; margin-top:10px;">
+                                <a class="btn " type="button" style="color: white;
+                                font-weight: bold; "> Se deconnecter</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+{% endblock %}
 
-    <table class="table">
+{% block body %}
+<img src="../../assets/img/window-interior-decor.jpg" alt="" width="100%" style="position: absolute;top: -100px; z-index: -1;">
+<div class="container" style="background-color: white; margin-top: 20px; height: 54%; border-radius: 5px; padding: 10px;">
+
+    {#<div style="background-color: black; padding: 5px; display: inline-block; border-radius: 5px; margin-top: 10px; margin-bottom: 30px">
+        <a href="{{ path('app_reservation_new') }}" style="text-decoration: none; color: white; font-weight: bold;">Ajouter</a>
+    </div>
+    #}
+    <table class="table" style="justify-content: center;">
         <thead>
-            <tr>
+            <tr style="background-color: black;color: white;">
                 <th>Id</th>
-                <th>Rdateentree</th>
-                <th>Rnombremois</th>
-                <th>Rcontrat</th>
-                <th>actions</th>
+                <th>date d'entree</th>
+                <th>nombre de mois</th>
+                <th>contrat</th>
+                <th>adresse</th>
             </tr>
         </thead>
         <tbody>
@@ -22,9 +61,13 @@
                 <td>{{ a_reservation.rdateentree ? a_reservation.rdateentree|date('Y-m-d') : '' }}</td>
                 <td>{{ a_reservation.rnombremois }}</td>
                 <td>{{ a_reservation.rcontrat }}</td>
-                <td>
+                {#<td>
                     <a href="{{ path('app_reservation_show', {'id': a_reservation.id}) }}">show</a>
                     <a href="{{ path('app_reservation_edit', {'id': a_reservation.id}) }}">edit</a>
+                </td>
+                #}
+                <td>
+                    Avenue {{ a_reservation.rannonce.arue }}, immeuble {{ a_reservation.rannonce.anumimmo }}, {{ a_reservation.rannonce.aville }}
                 </td>
             </tr>
         {% else %}
@@ -35,5 +78,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_new') }}">Create new</a>
+    
+</div>
 {% endblock %}

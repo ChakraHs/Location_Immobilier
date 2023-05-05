@@ -19,7 +19,7 @@ final class Version20230423125508 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
+       /* // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE aannonce (id INT AUTO_INCREMENT NOT NULL, aproprietaire_id INT NOT NULL, acategory_id INT NOT NULL, aprix DOUBLE PRECISION NOT NULL, aville VARCHAR(255) NOT NULL, arue VARCHAR(255) NOT NULL, anumimmo INT NOT NULL, aetat VARCHAR(255) NOT NULL, atraite VARCHAR(255) NOT NULL, INDEX IDX_125A33D7DA845AEE (aproprietaire_id), INDEX IDX_125A33D7B1E3CA06 (acategory_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE acategory (id INT AUTO_INCREMENT NOT NULL, catnom VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE aclient (id INT AUTO_INCREMENT NOT NULL, cnom VARCHAR(255) NOT NULL, cprenom VARCHAR(255) NOT NULL, cemail VARCHAR(255) NOT NULL, cmdp VARCHAR(255) NOT NULL, ctele VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -44,6 +44,7 @@ final class Version20230423125508 extends AbstractMigration
         $this->addSql('DROP TABLE image_immo');
         $this->addSql('DROP TABLE proprietaire');
         $this->addSql('DROP TABLE reservation');
+        */
     }
 
     public function down(Schema $schema): void
