@@ -6,8 +6,8 @@ import { TiDeleteOutline , TiUserDelete } from 'react-icons/ti'
 import { FaUserEdit } from 'react-icons/fa'
 
 
-import { default as image } from '../../../../public/uploads/backyard-water-contemporary-architecture-sky.jpg'
-import { default as image2 } from '../../../../public/uploads/villa-house-model-key-drawing-retro-desktop-real-estate-sale-concept_1387-310.avif'
+import { default as image } from '../../../../public/uploads/Annonce_Image/backyard-water-contemporary-architecture-sky.jpg'
+import { default as image2 } from '../../../../public/uploads/Annonce_Image/villa-house-model-key-drawing-retro-desktop-real-estate-sale-concept_1387-310.avif'
 
 const Card = (props) => {
   return (
@@ -34,7 +34,6 @@ const Card = (props) => {
             </div>
             <div className="Annonce-item-content-immeuble-config">
               <a href="" className="config edit"><FaUserEdit/></a>
-              <a href="" className="config "></a>
               <a href="" className="config delete"><TiUserDelete/></a>
             </div>
           </div>

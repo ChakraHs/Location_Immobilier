@@ -79,3 +79,8 @@ body
     justify-content: space-around;
     flex-wrap: wrap;
 }
+a
+{
+    color: black;
+    text-decoration: none;
+}

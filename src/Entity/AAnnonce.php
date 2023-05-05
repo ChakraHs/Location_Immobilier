@@ -37,7 +37,7 @@ class AAnnonce
     #[ORM\JoinColumn(nullable: false)]
     private ?AProprietaire $aproprietaire = null;
 
-    #[ORM\OneToMany(mappedBy: 'iannonce', targetEntity: AImage::class)]
+    #[ORM\OneToMany(mappedBy: 'iannonce', targetEntity: AImage::class, cascade: array('persist','remove'))]
     private Collection $aImages;
 
     #[ORM\ManyToOne(inversedBy: 'cannonces')]
@@ -168,7 +168,6 @@ class AAnnonce
 
         return $this;
     }
-
     public function removeAImage(AImage $aImage): self
     {
         if ($this->aImages->removeElement($aImage)) {

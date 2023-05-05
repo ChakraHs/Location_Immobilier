@@ -25,7 +25,33 @@
         {{ form_widget(form.acategory) }}
     </div>
     <div class="hero-search-input margin-0">
-        {{ form_widget(form.aproprietaire) }}
+        <ul class="tags"
+            data-index="0"
+            data-prototype="{#{{ form_widget(form.aImages.vars.prototype.image)|e('html_attr') }}#}"
+        ></ul>
     </div>
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_widget(form.aImages.vars.prototype.image) }}
+    <div class="hero-search-input margin-0">
+        {{ form_widget(form.aproprietaire) }}
+        {#
+        {{ dump(form.aproprietaire) }}.vars.prototype.image
+        
+        {{ dump(form.aImages.vars.prototype.image) }}
+        #}
+    </div>
+    <div class="hero-search-3">
+        <div class="hero-search-input second-search margin-1">
+            <input class="form-control form-control-sm" type="text" id='{{ form.bedrooms.vars.id }}' name='{{ form.bedrooms.vars.full_name }}' value='{{ form.bedrooms.vars.value }}' placeholder="Bedrooms" aria-label=".form-control-sm example">
+            {% do form.bedrooms.setRendered %}
+        </div>
+        <div class="hero-search-input second-search margin-2">
+            <input class="form-control form-control-sm" type="text" id='{{ form.bathrooms.vars.id }}' name='{{ form.bathrooms.vars.full_name }}' value='{{ form.bathrooms.vars.value }}' placeholder="Bathrooms" aria-label=".form-control-sm example">
+            {% do form.bathrooms.setRendered %}
+        </div>
+        <div class="hero-search-input second-search margin-3">
+            <input class="form-control form-control-sm" type="text" id='{{ form.Surface.vars.id }}' name='{{ form.Surface.vars.full_name }}' value='{{ form.Surface.vars.value }}' placeholder="la Surface" aria-label=".form-control-sm example">
+            {% do form.Surface.setRendered %}
+        </div>
+    </div>
+    <button class="btn" data-collection-holder-class="tags">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

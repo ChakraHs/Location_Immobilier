@@ -11,13 +11,13 @@ class AImage
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id;
 
     #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    private ?string $image;
 
     #[ORM\ManyToOne(inversedBy: 'aImages')]
-    private ?AAnnonce $iannonce = null;
+    private ?AAnnonce $iannonce ;
 
     public function getId(): ?int
     {
@@ -46,5 +46,9 @@ class AImage
         $this->iannonce = $iannonce;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->getImage();
     }
 }

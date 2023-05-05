@@ -29,7 +29,12 @@
     border-top-left-radius: var(--border-radius-secondary);
     border-top-right-radius: var(--border-radius-secondary);
 }
-
+.Annonce-item-content-immeuble
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .donnee
 {
     padding-bottom: calc(var(--padding-secondary)/5) ;
@@ -57,4 +62,23 @@
 .donnee-intern
 {
     padding-right: var(--padding-secondary);
+}
+.Annonce-item-content-immeuble-config
+{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
+}
+.config
+{
+    padding: calc(var(--padding-secondary)/5);
+    font-size: x-large;
+}
+.edit 
+{
+    color:aqua;
+}
+.delete
+{
+    color: red;
 }
