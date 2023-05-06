@@ -1,20 +1,13 @@
 import React from 'react'
-import '../../../styles/Card.css'
+import '../../../../styles/ImageSlider.css'
 import { HiLocationMarker } from 'react-icons/hi'
 import { MdOutlineBedroomParent ,MdOutlineBathroom } from 'react-icons/md'
-import { TiDeleteOutline , TiUserDelete } from 'react-icons/ti'
+import { TiUserDelete } from 'react-icons/ti'
 import { FaUserEdit } from 'react-icons/fa'
 
-
-import { default as image } from '../../../../public/uploads/Annonce_Image/backyard-water-contemporary-architecture-sky.jpg'
-import { default as image2 } from '../../../../public/uploads/Annonce_Image/villa-house-model-key-drawing-retro-desktop-real-estate-sale-concept_1387-310.avif'
-
-const Card = (props) => {
+const CardContent = (props) => {
   return (
-    <div className='Annonce-item'>
-      <div className='Annonce-wrapper'>
-        <img className='Annonce-item-image' alt='' src={ image } />
-        <div className="Annonce-item-content">
+    <div className="Annonce-item-content">
           <div className="Annonce-item-content-immeuble">
             <div className="Annonce-item-content-immeuble-donnee">
               <div className="donnee category">
@@ -41,9 +34,7 @@ const Card = (props) => {
 
           </div>
         </div>
-      </div>
-    </div>
   )
 }
 
-export default Card
+export default CardContent

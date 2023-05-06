@@ -23,12 +23,7 @@
     border: 0.5px solid black;
 }
 
-.Annonce-item-image
-{
-    width: 100%;
-    border-top-left-radius: var(--border-radius-secondary);
-    border-top-right-radius: var(--border-radius-secondary);
-}
+
 .Annonce-item-content-immeuble
 {
     display:flex;
