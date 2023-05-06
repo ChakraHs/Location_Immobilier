@@ -1,33 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="navbarScroll">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+            <a class="nav-link p-2 p-lg-3" href="{{ path('app_reservation_index') }}">Client</a>
+        </li>
+        {#<li class="nav-item">
+            <a class="nav-link p-2 p-lg-3" href="{{ path('app_reservation_index') }}">Reservations</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2 p-lg-3" href="{{ path('app_annonce_index') }}">Annonces</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2 p-lg-3 active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle p-2 p-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Link
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Se connecter </a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </li>#}
+        <li>
+            <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973;">
+                <a class="btn " type="button" style="color: white;
+                font-weight: bold; "> Se connecter</a>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+</nav>
+{% endblock %}
+
 {% block body %}
-    <div class='container-fluid' style='padding:none;background-color: white;'>
-        <div 
-            class="hero1" 
-            style=' background-image: url({{ asset('assets/img/backyard-water-contemporary-architecture-sky.jpg') }});
-                    margin: 0px;
-                    background-repeat: no-repeat;
-                    background-position :center;
-                    background-size:cover;
-                    display: flex;
-                    flex-direction: column;
-                    padding: var(--padding-primary);
-                    align-items: center;
-                    justify-content: center;
-                    font-family: var(--font-family-primary);
-                    width:auto;
-                    min-height:80vh;
-                    ' > 
-            <div class="hero-title">
-                <div class="hero-title-principale">
+<img src="../../assets/img/window-interior-decor.jpg" alt="" width="100%" style="position: absolute;top: -100px; z-index: -1;">
+    <div class="container">
+        <div class="hero!" style="
+            display: flex;
+            flex-direction: column;
+            padding: var(--padding-primary);
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-family-primary);
+            width: auto;
+            height: auto;
+            background-color: transparent;
+            "> 
+            <div class="hero-title" style="width: 80%;">
+                <div class="hero-title-principale" style="font-size: 48px; font-weight: bold;
+                color: white; -webkit-text-stroke: 0.1px black;">
                     Trouver  le bien qui reprendre à votre projet de location Immobilière
                 </div>
             </div>
-            <div class="hero-search">
+            <div class="hero-search" style="background-color: white; padding: 20px; border-radius: 10px;">
                 <form action="" method="get">
-                    <div class="hero-search-input margin-0">
-                        <input class="form-control form-control-sm" type="text" name="ville" placeholder="ville" aria-label=".form-control-sm example">
+
+                    <div data-testid="container" class="multi-selection-autocomplete"
+                    style="display: flex;
+                    border: 2px solid rgb(219, 217, 217);
+                    border-radius: 5px;
+                    margin-bottom: 10px;">
+                        <svg style="width:15px; margin-left:5px;" viewBox="4 4 15 15" class="multi-selection-autocomplete__search-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7399 13.6792L18.7806 17.7197C19.0735 18.0126 19.0735 18.4875 18.7806 18.7804C18.4877 19.0733 18.0128 19.0733 17.7199 18.7804L13.6792 14.7399C12.6632 15.5297 11.3865 16 10 16C6.68629 16 4 13.3137 4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 11.3865 15.5297 12.6632 14.7399 13.6792ZM10 14.5C12.4853 14.5 14.5 12.4853 14.5 10C14.5 7.51472 12.4853 5.5 10 5.5C7.51472 5.5 5.5 7.51472 5.5 10C5.5 12.4853 7.51472 14.5 10 14.5Z"></path></svg>
+                        
+                        <input class="form-control form-control-sm" type="text" name="ville" placeholder="ville" aria-label=".form-control-sm example"
+                        style="outline: none;
+                        border: 0;">
                     </div>
                     <div class="hero-search-3">
                         <div class="hero-search-input second-search margin-1">
@@ -40,8 +85,9 @@
                             <input class="form-control form-control-sm" type="text" name="chambreaBains" placeholder="Chambrea & Bains" aria-label=".form-control-sm example">
                         </div>
                     </div>
-                    <div class="d-grid gap-2 mx-auto hero-search-button">
-                        <button class="btn " type="button"> Chercher</button>
+                    <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973; margin-top: 10px;">
+                        <button class="btn " type="button" style="color: white;
+                        font-weight: bold; "> Chercher</button>
                     </div>
                 </form>
             </div>
