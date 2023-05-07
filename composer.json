@@ -51,7 +51,10 @@
             "symfony/flex": true,
             "symfony/runtime": true
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "secure-http": false,
+        "process-timeout": 600
+        
     },
     "autoload": {
         "psr-4": {
@@ -102,5 +105,16 @@
         "symfony/phpunit-bridge": "^6.2",
         "symfony/stopwatch": "6.2.*",
         "symfony/web-profiler-bundle": "6.2.*"
-    }
+    },
+    
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        {
+            "packagist": false
+        }
+    ]
+    
 }

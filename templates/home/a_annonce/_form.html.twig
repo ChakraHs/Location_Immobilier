@@ -1,0 +1,57 @@
+{{ form_start(form) }}
+    <div class="hero-search-input margin-0">
+        <input class="form-control form-control-sm" type="text" id='{{ form.aprix.vars.id }}' name='{{ form.aprix.vars.full_name }}' value='{{ form.aprix.vars.value }}' placeholder="Prix" aria-label=".form-control-sm example">
+        {% do form.aprix.setRendered %}
+    </div>
+    <div class="hero-search-3">
+        <div class="hero-search-input second-search margin-1">
+            <input class="form-control form-control-sm" type="text" id='{{ form.aville.vars.id }}' name='{{ form.aville.vars.full_name }}' value='{{ form.aville.vars.value }}' placeholder="Ville" aria-label=".form-control-sm example">
+            {% do form.aville.setRendered %}
+        </div>
+        <div class="hero-search-input second-search margin-2">
+            <input class="form-control form-control-sm" type="text" id='{{ form.arue.vars.id }}' name='{{ form.arue.vars.full_name }}' value='{{ form.arue.vars.value }}' placeholder="La Rue de l'immeuble" aria-label=".form-control-sm example">
+            {% do form.arue.setRendered %}
+        </div>
+        <div class="hero-search-input second-search margin-3">
+            <input class="form-control form-control-sm" type="text" id='{{ form.anumimmo.vars.id }}' name='{{ form.anumimmo.vars.full_name }}' value='{{ form.anumimmo.vars.value }}' placeholder="la numéro de l'immeuble" aria-label=".form-control-sm example">
+            {% do form.anumimmo.setRendered %}
+            <input type='hidden' id='{{ form.aetat.vars.id }}' name='{{ form.aetat.vars.full_name }}' value='false'>
+            {% do form.aetat.setRendered %}
+            <input type='hidden' id='{{ form.atraite.vars.id }}' name='{{ form.atraite.vars.full_name }}' value='false'>
+            {% do form.atraite.setRendered %}
+        </div>
+    </div>
+    <div class="hero-search-input margin-0">
+        {{ form_widget(form.acategory) }}
+    </div>
+    <div class="hero-search-input margin-0">
+        <ul class="tags"
+            data-index="0"
+            data-prototype="{#{{ form_widget(form.aImages.vars.prototype.image)|e('html_attr') }}#}"
+        ></ul>
+    </div>
+    {{ form_widget(form.aImages.vars.prototype.image) }}
+    <div class="hero-search-input margin-0">
+        {{ form_widget(form.aproprietaire) }}
+        {#
+        {{ dump(form.aproprietaire) }}.vars.prototype.image
+        
+        {{ dump(form.aImages.vars.prototype.image) }}
+        #}
+    </div>
+    <div class="hero-search-3">
+        <div class="hero-search-input second-search margin-1">
+            <input class="form-control form-control-sm" type="text" id='{{ form.bedrooms.vars.id }}' name='{{ form.bedrooms.vars.full_name }}' value='{{ form.bedrooms.vars.value }}' placeholder="Bedrooms" aria-label=".form-control-sm example">
+            {% do form.bedrooms.setRendered %}
+        </div>
+        <div class="hero-search-input second-search margin-2">
+            <input class="form-control form-control-sm" type="text" id='{{ form.bathrooms.vars.id }}' name='{{ form.bathrooms.vars.full_name }}' value='{{ form.bathrooms.vars.value }}' placeholder="Bathrooms" aria-label=".form-control-sm example">
+            {% do form.bathrooms.setRendered %}
+        </div>
+        <div class="hero-search-input second-search margin-3">
+            <input class="form-control form-control-sm" type="text" id='{{ form.Surface.vars.id }}' name='{{ form.Surface.vars.full_name }}' value='{{ form.Surface.vars.value }}' placeholder="la Surface" aria-label=".form-control-sm example">
+            {% do form.Surface.setRendered %}
+        </div>
+    </div>
+    <button class="btn" data-collection-holder-class="tags">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
