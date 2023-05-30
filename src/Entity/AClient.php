@@ -33,6 +33,9 @@ class AClient
     #[ORM\OneToMany(mappedBy: 'rclient', targetEntity: AReservation::class)]
     private Collection $creservations;
 
+    #[ORM\OneToOne(inversedBy: 'aClient', cascade: ['persist', 'remove'])]
+    private ?User $Cuser = null;
+
     public function __construct()
     {
         $this->creservations = new ArrayCollection();
@@ -129,6 +132,18 @@ class AClient
                 $creservation->setRclient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCuser(): ?user
+    {
+        return $this->Cuser;
+    }
+
+    public function setCuser(?user $Cuser): self
+    {
+        $this->Cuser = $Cuser;
 
         return $this;
     }

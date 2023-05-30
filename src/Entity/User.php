@@ -29,6 +29,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
+    #[ORM\OneToOne(mappedBy: 'Cuser', cascade: ['persist', 'remove'])]
+    private ?AClient $aClient = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,5 +103,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getAClient(): ?AClient
+    {
+        return $this->aClient;
+    }
+
+    public function setAClient(?AClient $aClient): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($aClient === null && $this->aClient !== null) {
+            $this->aClient->setCuser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($aClient !== null && $aClient->getCuser() !== $this) {
+            $aClient->setCuser($this);
+        }
+
+        $this->aClient = $aClient;
+
+        return $this;
     }
 }

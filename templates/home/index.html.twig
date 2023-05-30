@@ -60,36 +60,9 @@
                     Trouver  le bien qui reprendre à votre projet de location Immobilière
                 </div>
             </div>
-            <div class="hero-search" style="background-color: white; padding: 20px; border-radius: 10px;">
-                <form action="" method="get">
+            <div class="hero-search" style="background-color: white; padding: 20px; border-radius: 10px; width:80%; padding-top:30px; padding-bottom:30px;">
+            {{ include('home/_form.html.twig') }}
 
-                    <div data-testid="container" class="multi-selection-autocomplete"
-                    style="display: flex;
-                    border: 2px solid rgb(219, 217, 217);
-                    border-radius: 5px;
-                    margin-bottom: 10px;">
-                        <svg style="width:15px; margin-left:5px;" viewBox="4 4 15 15" class="multi-selection-autocomplete__search-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7399 13.6792L18.7806 17.7197C19.0735 18.0126 19.0735 18.4875 18.7806 18.7804C18.4877 19.0733 18.0128 19.0733 17.7199 18.7804L13.6792 14.7399C12.6632 15.5297 11.3865 16 10 16C6.68629 16 4 13.3137 4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 11.3865 15.5297 12.6632 14.7399 13.6792ZM10 14.5C12.4853 14.5 14.5 12.4853 14.5 10C14.5 7.51472 12.4853 5.5 10 5.5C7.51472 5.5 5.5 7.51472 5.5 10C5.5 12.4853 7.51472 14.5 10 14.5Z"></path></svg>
-                        
-                        <input class="form-control form-control-sm" type="text" name="ville" placeholder="ville" aria-label=".form-control-sm example"
-                        style="outline: none;
-                        border: 0;">
-                    </div>
-                    <div class="hero-search-3">
-                        <div class="hero-search-input second-search margin-1">
-                            <input class="form-control form-control-sm" type="text" name="Type de propriete" placeholder="Type de propriete" aria-label=".form-control-sm example">
-                        </div>
-                        <div class="hero-search-input second-search margin-2">
-                            <input class="form-control form-control-sm" type="text" name="Prix" placeholder="Prix" aria-label=".form-control-sm example">
-                        </div>
-                        <div class="hero-search-input second-search margin-3">
-                            <input class="form-control form-control-sm" type="text" name="chambreaBains" placeholder="Chambrea & Bains" aria-label=".form-control-sm example">
-                        </div>
-                    </div>
-                    <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973; margin-top: 10px;">
-                        <button class="btn " type="button" style="color: white;
-                        font-weight: bold; "> Chercher</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
