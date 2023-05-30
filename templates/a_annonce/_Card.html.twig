@@ -1,0 +1,65 @@
+<div class="Annonce-items">
+        {% for a_annonce in a_annonces %}
+            {% set images = []  %}
+            {% for AImage in AImages %}
+                {% if AImage.iannonce.id == a_annonce.id %}
+                    {#{% set message="../../../../../public/uploads/Annonce_Image/"~AImage.image %}#}
+                    {% set images= images|merge([AImage.image]) %}
+                {% endif %}
+            {% endfor %}
+
+            {% set deleteUrl = path('app_annonce_delete', {'id': a_annonce.id}) %}
+            {% set showUrl = path('app_annonce_show', {'id': a_annonce.id}) %}
+            {% set editUrl = path('app_annonce_edit', {'id': a_annonce.id}) %}
+            {% set csrf_token_id = csrf_token('delete' ~ a_annonce.id)  %}
+            <div class='Annonce-item'>
+                <div class='Annonce-wrapper'>
+                    <div id="carouselExample_{{ a_annonce.id }}" class="carousel slide">
+                        <div class="carousel-inner">
+                            {% set i=0 %}
+                            {% for image in images %}
+                                {% if i == 0 %}
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100 Annonce-item-image" src={{ asset('uploads/Annonce_Image/'~image) }} alt={{ 'uploads/Annonce_Image/'~image }}>
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100 Annonce-item-image" src={{ asset('uploads/Annonce_Image/'~image) }} alt={{ image }}>
+                                    </div>
+                                {% endif %}
+                                {% set i=i+1 %}
+                            {% endfor %}
+                        </div>
+                        {% if i !=1 %}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample_{{ a_annonce.id }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample_{{ a_annonce.id }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <div {{ react_component('Components/CardContent/CardContent',
+                        {   'Category': a_annonce.acategory.catnom ,
+                            'Prix': a_annonce.aprix ,
+                            'Ville':a_annonce.aville ,
+                            'Rue':a_annonce.arue ,
+                            'NumImmo':a_annonce.anumimmo ,
+                            'Bedrooms':a_annonce.bedrooms ,
+                            'Bathrooms':a_annonce.bathrooms,
+                            'Surface':a_annonce.Surface ,
+                            'deleteUrl':deleteUrl,
+                            'csrf_token_id':csrf_token_id,
+                            'showUrl':showUrl,
+                            'editUrl':editUrl,
+                        }) }}></div>
+                </div>
+            </div>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+    </div>

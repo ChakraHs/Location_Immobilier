@@ -25,19 +25,13 @@
         {{ form_widget(form.acategory) }}
     </div>
     <div class="hero-search-input margin-0">
-        <ul class="tags"
-            data-index="0"
-            data-prototype="{#{{ form_widget(form.aImages.vars.prototype.image)|e('html_attr') }}#}"
-        ></ul>
+        {# {{ dump(form.aImages.vars.prototype.image) }} #}
+        {{ form_widget(form.aImages.vars.prototype.image) }}
+        {# <input class="form-control form-control-sm" type="file" id='{{ form.aImages.vars.prototype.image.vars.id }}' name='{{ form.aImages.vars.prototype.image.vars.full_name }}' value='{{ form.aImages.vars.prototype.image.vars.value }}' aria-label=".form-control-sm example" multiple> #}
+        {% do form.aImages.setRendered %}
     </div>
-    {{ form_widget(form.aImages.vars.prototype.image) }}
     <div class="hero-search-input margin-0">
         {{ form_widget(form.aproprietaire) }}
-        {#
-        {{ dump(form.aproprietaire) }}.vars.prototype.image
-        
-        {{ dump(form.aImages.vars.prototype.image) }}
-        #}
     </div>
     <div class="hero-search-3">
         <div class="hero-search-input second-search margin-1">

@@ -1,0 +1,55 @@
+.Annonce-item-content-immeuble
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.donnee
+{
+    padding-bottom: calc(var(--padding-secondary)/5) ;
+    padding-left: calc(var(--padding-secondary)/5) ;
+}
+.category
+{
+    font-size: large;
+    font-weight:500;
+}
+.prix
+{
+    font-size: larger;
+    font-weight: bold;
+}
+.adresse
+{
+    font-weight:500;
+}
+.intern
+{
+    display: flex;
+    align-items: center;
+}
+.donnee-intern
+{
+    padding-right: var(--padding-secondary);
+}
+.Annonce-item-content-immeuble-config
+{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
+}
+.config
+{
+    padding: calc(var(--padding-secondary)/5);
+    font-size: x-large;
+    background-color: white;
+    border: none;
+}
+.edit 
+{
+    color:aqua;
+}
+.delete
+{
+    color: red;
+}

@@ -21,9 +21,22 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ path('app_home') }}" style="font-weight: bold;"> Logo </a>
                 {% block nav %}{% endblock %}
-            </nav>
+            </div>
+        </nav>
+        {% for message in app.session.flashbag.get('succes') %}
+            <div class='alert alert-success'>
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.session.flashbag.get('delete') %}
+            <div class='alert alert-danger'>
+                {{ message }}
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.js') }}"></script>
+        <script src="{{ asset('assets/js/App.js') }}" ></script>
     </body>
 </html>

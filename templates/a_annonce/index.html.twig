@@ -4,69 +4,7 @@
 
 {% block body %}
 <div class='container-fluid' style='padding:none;background-color: white;'>
-    <div class="Annonce-items">
-        {% for a_annonce in a_annonces %}
-            {% set image = []  %}
-            {% for AImage in AImages %}
-                {% if AImage.iannonce.id == a_annonce.id %}
-                    {% set image= image|merge([AImage.image]) %}
-                {% endif %}
-            {% endfor %}
-            <a href='/home' >     
-                <div {{ react_component('Card/Card',
-                    {   'Category': a_annonce.acategory.catnom ,
-                        'Prix': a_annonce.aprix ,
-                        'Ville':a_annonce.aville ,
-                        'Rue':a_annonce.arue ,
-                        'NumImmo':a_annonce.anumimmo ,
-                        'Bedrooms':a_annonce.bedrooms ,
-                        'Bathrooms':a_annonce.bathrooms,
-                        'Surface':a_annonce.Surface ,
-                        'image':image,
-                    }) }}></div>
-            </a>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Aprix</th>
-                <th>Aville</th>
-                <th>Arue</th>
-                <th>Anumimmo</th>
-                <th>Aetat</th>
-                <th>Atraite</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for a_annonce in a_annonces %}
-            <tr>
-                <td>{{ a_annonce.id }}</td>
-                <td>{{ a_annonce.aprix }}</td>
-                <td>{{ a_annonce.aville }}</td>
-                <td>{{ a_annonce.arue }}</td>
-                <td>{{ a_annonce.anumimmo }}</td>
-                <td>{{ a_annonce.aetat }}</td>
-                <td>{{ a_annonce.atraite }}</td>
-                <td>
-                    <a href="{{ path('app_annonce_show', {'id': a_annonce.id}) }}">show</a>
-                    <a href="{{ path('app_annonce_edit', {'id': a_annonce.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+    {{ include('a_annonce/_Card.html.twig') }}
     <a href="{{ path('app_annonce_new') }}">Create new</a>
 </div>
 {% endblock %}

@@ -5,9 +5,20 @@
 {% block body %}
     <h1>Edit AAnnonce</h1>
 
-    {{ include('a_annonce/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_annonce_index') }}">back to list</a>
-
-    {{ include('a_annonce/_delete_form.html.twig') }}
+    <div class='container-fluid' >
+        <div 
+            class="hero1" 
+            style=' display: flex;
+                    flex-direction: column;
+                    padding: var(--padding-primary);
+                    align-items: center;
+                    justify-content: center;
+                    font-family: var(--font-family-primary);
+                    width:auto;
+                    min-height:80vh;
+                    '  >
+            {{ include('a_annonce/_form.html.twig', {'button_label': 'Update'}) }}
+            {# {{ include('a_annonce/_delete_form.html.twig') }} #}
+        </div>
+    </div>
 {% endblock %}
