@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AAnnonce index{% endblock %}
+
+{% block body %}
+<div class="row container-fluid" style="margin-left: 3rem; margin-top: 1rem;">
+    <div class="col-md-12">
+        <div class="my-3 d-flex justify-content-between align-items-center">
+            <button class="btn btn-dark position-relative">
+                Annonces 
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
+                    {{ a_annonces|length }}
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid' style='padding:none;background-color: white;'>
+
+
+    <div class="row container" style="padding-left: 3rem; padding-right: 3rem;">
+        {% if a_annonces|length %}
+        {% for a_annonce in a_annonces %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem; height: 100%;">
+                <img src="{{ asset('uploads/annonce_image/' ~ a_annonce.getAImages()[0].image) }}" alt="" srcset="" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ a_annonce.ACategory }}
+                    </h5>
+                    <p class="card-text">
+                        Avenue {{ a_annonce.arue }}, immeuble {{ a_annonce.anumimmo }}
+                        <br>
+                        {{ a_annonce.aville }}
+                    </p>
+                    <h5>
+                        <span class="text text-danger">
+                            {{ a_annonce.APrix }} MAD/mois
+                        </span>
+                    </h5>
+                    <a href="" class="btn btn-sm btn-primary">Reserver</a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-info">
+            No annonces found!
+        </div>
+        {% endif %}
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Aprix</th>
+                <th>Aville</th>
+                <th>Arue</th>
+                <th>Anumimmo</th>
+                <th>Aetat</th>
+                <th>Atraite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a_annonce in a_annonces %}
+            <tr>
+                <td>{{ a_annonce.id }}</td>
+                <td>{{ a_annonce.aprix }}</td>
+                <td>{{ a_annonce.aville }}</td>
+                <td>{{ a_annonce.arue }}</td>
+                <td>{{ a_annonce.anumimmo }}</td>
+                <td>{{ a_annonce.aetat }}</td>
+                <td>{{ a_annonce.atraite }}</td>
+                <td>
+                    <a href="{{ path('app_annonce_show', {'id': a_annonce.id}) }}">show</a>
+                    <a href="{{ path('app_annonce_edit', {'id': a_annonce.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_annonce_new') }}">Create new</a>
+</div>
+{% endblock %}

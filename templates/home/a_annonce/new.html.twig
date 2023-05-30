@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Annonce{% endblock %}
+
+{% block body %}
+    <h1>Create new Annonce</h1>
+    <div class='container-fluid' >
+        <div 
+            class="hero1" 
+            style=' display: flex;
+                    flex-direction: column;
+                    padding: var(--padding-primary);
+                    align-items: center;
+                    justify-content: center;
+                    font-family: var(--font-family-primary);
+                    width:auto;
+                    min-height:80vh;
+                    '  >
+            {{ include('a_annonce/_form.html.twig') }}
+        </div>
+    </div>
+    <a href="{{ path('app_annonce_index') }}">back to list</a>
+{% endblock %}

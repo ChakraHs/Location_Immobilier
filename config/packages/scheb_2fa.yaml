@@ -1,0 +1,13 @@
+# See the configuration reference at https://symfony.com/bundles/SchebTwoFactorBundle/6.x/configuration.html
+scheb_two_factor:
+    security_tokens:
+        - Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+        - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken
+        # email:
+        # enabled: true
+        # mailer: acme.custom_mailer_service  # Use alternative service to send the authentication code
+        # code_generator: acme.custom_code_generator_service  # Use alternative service to generate authentication code
+        # sender_email: imco12.service@gmail.com
+        # sender_name: imco  # Optional
+        # digits: 4                      # Number of digits in authentication code
+        # template: security/2fa_form.html.twig   # Template used to render the authentication form

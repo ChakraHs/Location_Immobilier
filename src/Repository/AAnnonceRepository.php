@@ -39,6 +39,29 @@ class AAnnonceRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findByParam($searchVille,$searchType,$searchChambres,$searchPrixMax,$searchSurfaceMin)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->leftJoin('p.acategory', 'c');
+        $qb->andWhere(
+                    $qb->expr()->andX(
+                        $qb->expr()->like('p.aville', ':searchVille'),
+                        $qb->expr()->lte('p.aprix', ':searchPrixMax'),
+                        $qb->expr()->like('c.catnom', ':searchType'),
+                        $qb->expr()->gte('p.bedrooms', ':searchChambres'),
+                        $qb->expr()->gte('p.Surface', ':searchSurfaceMin')  
+                    )
+        )
+            ->setParameter('searchVille', '%' . $searchVille . '%')
+            ->setParameter('searchPrixMax',$searchPrixMax)
+            ->setParameter('searchSurfaceMin',$searchSurfaceMin)
+            ->setParameter('searchChambres',$searchChambres)
+            ->setParameter('searchType', '%' . $searchType . '%')
+            ->orderBy('p.aville', 'ASC');
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return AAnnonce[] Returns an array of AAnnonce objects
 //     */
