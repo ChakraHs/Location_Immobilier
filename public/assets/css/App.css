@@ -84,3 +84,25 @@ a
     color: black;
     text-decoration: none;
 }
+
+.Annonce-item-image
+{
+    height: 250px;
+    border-top-left-radius: calc(var(--border-radius-secondary)/2);
+    border-top-right-radius: calc(var(--border-radius-secondary)/2);
+}
+.config
+{
+    padding: calc(var(--padding-secondary)/5);
+    font-size: x-large;
+    background-color: white;
+    border: none;
+}
+.Annonce-wrapper
+{
+    width: 400px;
+    border-radius: calc(var(--border-radius-secondary)/2);
+    margin: calc(var(--margin-primary)/5);
+    border: 1px solid #dbd5d5;
+    box-shadow: 0 0 5px 0 rgb(41 85 115 / 21%);
+}

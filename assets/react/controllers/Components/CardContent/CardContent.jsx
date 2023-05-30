@@ -1,11 +1,13 @@
 import React from 'react'
-import '../../../../styles/ImageSlider.css'
+import '../../../../styles/CardContent.css'
+
+import { Deleteicon } from '../index'
+
 import { HiLocationMarker } from 'react-icons/hi'
 import { MdOutlineBedroomParent ,MdOutlineBathroom } from 'react-icons/md'
-import { TiUserDelete } from 'react-icons/ti'
-import { FaUserEdit } from 'react-icons/fa'
+import { TbHomeEdit } from 'react-icons/tb'
 
-const CardContent = (props) => {
+const CardContent = ( props ) => {
   return (
     <div className="Annonce-item-content">
           <div className="Annonce-item-content-immeuble">
@@ -26,12 +28,15 @@ const CardContent = (props) => {
               </div>
             </div>
             <div className="Annonce-item-content-immeuble-config">
-              <a href="" className="config edit"><FaUserEdit/></a>
-              <a href="" className="config delete"><TiUserDelete/></a>
+              {/* <button className="config" onClick={handleAddImageClick}>
+                <BiImageAdd/>
+              </button> */}
+              <a href={ props.editUrl } className="config edit"><TbHomeEdit/></a>
+              <Deleteicon deleteUrl={ props.deleteUrl } csrf_token_id={ props.csrf_token_id } />
             </div>
           </div>
           <div className="Annonce-item-content-personel">
-
+            {/* {showAddImageForm && <AddImageForm addimageUrl={ props.addimageUrl } />} */}
           </div>
         </div>
   )

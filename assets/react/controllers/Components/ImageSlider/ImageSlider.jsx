@@ -1,13 +1,28 @@
 import React from 'react'
 import '../../../../styles/ImageSlider.css'
-import { default as image } from '../../../../../public/uploads/Annonce_Image/backyard-water-contemporary-architecture-sky.jpg'
-import { default as image2 } from '../../../../../public/uploads/Annonce_Image/villa-house-model-key-drawing-retro-desktop-real-estate-sale-concept_1387-310.avif'
+import '../../../../../node_modules/slick-carousel/slick/slick.css'
+import '../../../../../node_modules/slick-carousel/slick/slick-theme.css'
+
+import Slider from "react-slick";
 
 
-
-const ImageSlider = () => {
+const ImageSlider = (props) => {
+  const imagepath = '../../../../uploads/Annonce_Image/';
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
   return (
-    <img className='Annonce-item-image' alt='' src={ image2 } />
+    <Slider {...settings}>
+      { props.image.map(imageURL => (
+        <div key={ props.id }>
+          <img className='Annonce-item-image' alt={ `${imagepath}${imageURL}` } src={ `${imagepath}${imageURL}` } />
+        </div>
+      )) }
+    </Slider>
   )
 }
 
