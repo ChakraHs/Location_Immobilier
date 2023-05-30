@@ -3,7 +3,7 @@
 {% block title %}AAnnonce index{% endblock %}
 
 {% block body %}
-<div class="row container-fluid m-5">
+<div class="row container-fluid" style="margin-left: 3rem; margin-top: 1rem;">
     <div class="col-md-12">
         <div class="my-3 d-flex justify-content-between align-items-center">
             <button class="btn btn-dark position-relative">
@@ -19,10 +19,10 @@
 <div class='container-fluid' style='padding:none;background-color: white;'>
 
 
-    <div class="row container p-5">
+    <div class="row container" style="padding-left: 3rem; padding-right: 3rem;">
         {% if a_annonces|length %}
         {% for a_annonce in a_annonces %}
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card" style="width: 18rem; height: 100%;">
                 <img src="{{ asset('uploads/annonce_image/' ~ a_annonce.getAImages()[0].image) }}" alt="" srcset="" class="card-img-top">
                 <div class="card-body">

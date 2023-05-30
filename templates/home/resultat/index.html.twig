@@ -1,96 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
-
-{% block nav %}
-<div class="collapse navbar-collapse" id="navbarScroll">
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-            <a class="nav-link p-2 p-lg-3" href="{{ path('client_reservation_index') }}">Client</a>
-        </li>
-        {#<li class="nav-item">
-            <a class="nav-link p-2 p-lg-3" href="{{ path('app_reservation_index') }}">Reservations</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link p-2 p-lg-3" href="{{ path('app_annonce_index') }}">Annonces</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link p-2 p-lg-3 active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle p-2 p-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Link
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Se connecter </a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-        </li>#}
-        <li>
-            <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973;">
-                <a class="btn " type="button" style="color: white;
-                font-weight: bold; "> Se connecter</a>
-            </div>
-        </li>
-    </ul>
-</div>
-</div>
-</nav>
-{% endblock %}
+{% block title %}AAnnonce index{% endblock %}
 
 {% block body %}
-<img src="../../assets/img/window-interior-decor.jpg" alt="" width="100%" style="position: absolute;top: -100px; z-index: -1;">
-    <div class="container">
-        <div class="hero!" style="
-            display: flex;
-            flex-direction: column;
-            padding: var(--padding-primary);
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-family-primary);
-            width: auto;
-            height: auto;
-            background-color: transparent;
-            "> 
-            <div class="hero-title" style="width: 80%;">
-                <div class="hero-title-principale" style="font-size: 48px; font-weight: bold;
-                color: white; -webkit-text-stroke: 0.1px black;">
-                    Trouver  le bien qui reprendre à votre projet de location Immobilière
-                </div>
-            </div>
-            <div class="hero-search" style="background-color: white; padding: 20px; border-radius: 10px;">
-                <form action="" method="get">
-
-                    <div data-testid="container" class="multi-selection-autocomplete"
-                    style="display: flex;
-                    border: 2px solid rgb(219, 217, 217);
-                    border-radius: 5px;
-                    margin-bottom: 10px;">
-                        <svg style="width:15px; margin-left:5px;" viewBox="4 4 15 15" class="multi-selection-autocomplete__search-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7399 13.6792L18.7806 17.7197C19.0735 18.0126 19.0735 18.4875 18.7806 18.7804C18.4877 19.0733 18.0128 19.0733 17.7199 18.7804L13.6792 14.7399C12.6632 15.5297 11.3865 16 10 16C6.68629 16 4 13.3137 4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 11.3865 15.5297 12.6632 14.7399 13.6792ZM10 14.5C12.4853 14.5 14.5 12.4853 14.5 10C14.5 7.51472 12.4853 5.5 10 5.5C7.51472 5.5 5.5 7.51472 5.5 10C5.5 12.4853 7.51472 14.5 10 14.5Z"></path></svg>
-                        
-                        <input class="form-control form-control-sm" type="text" name="ville" placeholder="ville" aria-label=".form-control-sm example"
-                        style="outline: none;
-                        border: 0;">
-                    </div>
-                    <div class="hero-search-3">
-                        <div class="hero-search-input second-search margin-1">
-                            <input class="form-control form-control-sm" type="text" name="Type de propriete" placeholder="Type de propriete" aria-label=".form-control-sm example">
-                        </div>
-                        <div class="hero-search-input second-search margin-2">
-                            <input class="form-control form-control-sm" type="text" name="Prix" placeholder="Prix" aria-label=".form-control-sm example">
-                        </div>
-                        <div class="hero-search-input second-search margin-3">
-                            <input class="form-control form-control-sm" type="text" name="chambreaBains" placeholder="Chambrea & Bains" aria-label=".form-control-sm example">
-                        </div>
-                    </div>
-                    <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973; margin-top: 10px;">
-                        <button class="btn " type="button" style="color: white;
-                        font-weight: bold; "> Chercher</button>
-                    </div>
-                </form>
-            </div>
+<div class="row container-fluid" style="margin-left: 3rem; margin-top: 1rem;">
+    <div class="col-md-12">
+        <div class="my-3 d-flex justify-content-between align-items-center">
+            <button class="btn btn-dark position-relative">
+                Annonces 
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
+                    {{ a_annonces|length }}
+                </span>
+            </button>
         </div>
     </div>
+</div>
+
+<div class='container-fluid' style='padding:none;background-color: white;'>
+
+
+    <div class="row container" style="padding-left: 3rem; padding-right: 3rem;">
+        {% if a_annonces|length %}
+        {% for a_annonce in a_annonces %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem; height: 100%;">
+                <img src="{{ asset('uploads/annonce_image/' ~ a_annonce.getAImages()[0].image) }}" alt="" srcset="" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ a_annonce.ACategory }}
+                    </h5>
+                    <p class="card-text">
+                        Avenue {{ a_annonce.arue }}, immeuble {{ a_annonce.anumimmo }}
+                        <br>
+                        {{ a_annonce.aville }}
+                    </p>
+                    <h5>
+                        <span class="text text-danger">
+                            {{ a_annonce.APrix }} MAD/mois
+                        </span>
+                    </h5>
+                    <a href="{{ path('app_resultat_annonce_show', {'id': a_annonce.id}) }}" class="btn btn-sm btn-primary">Show</a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-info">
+            No annonces found!
+        </div>
+        {% endif %}
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Aprix</th>
+                <th>Aville</th>
+                <th>Arue</th>
+                <th>Anumimmo</th>
+                <th>Aetat</th>
+                <th>Atraite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a_annonce in a_annonces %}
+            <tr>
+                <td>{{ a_annonce.id }}</td>
+                <td>{{ a_annonce.aprix }}</td>
+                <td>{{ a_annonce.aville }}</td>
+                <td>{{ a_annonce.arue }}</td>
+                <td>{{ a_annonce.anumimmo }}</td>
+                <td>{{ a_annonce.aetat }}</td>
+                <td>{{ a_annonce.atraite }}</td>
+                <td>
+                    <a href="{{ path('app_annonce_show', {'id': a_annonce.id}) }}">show</a>
+                    <a href="{{ path('app_annonce_edit', {'id': a_annonce.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_annonce_new') }}">Create new</a>
+</div>
 {% endblock %}

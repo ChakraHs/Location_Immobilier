@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\AClient;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -42,6 +43,11 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('aClient', AClientType::class,[
+                'mapped' => false,
+                'required' => true,
+                'by_reference' => false,    
             ])
         ;
     }
