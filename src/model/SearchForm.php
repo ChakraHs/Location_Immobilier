@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 class SearchForm    
 {
     #[ORM\Column]
-    private ?string $ville = '';
+    private ?string $ville ;
 
 
     public function getVille():string
@@ -19,7 +19,7 @@ class SearchForm
         $this->ville = $ville;    
     }
     #[ORM\Column]
-    private ?string $type = '';
+    private ?string $type ;
     
 
     public function getType():string
@@ -73,7 +73,7 @@ class SearchForm
     }
 
     #[ORM\Column]
-    private ?float $surfaceMax = 0;
+    private ?float $surfaceMax;
     
     public function getSurfaceMax():float
     {

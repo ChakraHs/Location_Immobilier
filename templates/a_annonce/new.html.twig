@@ -3,20 +3,26 @@
 {% block title %}New Annonce{% endblock %}
 
 {% block body %}
-    <h1>Create new Annonce</h1>
-    <div class='container-fluid' >
-        <div 
-            class="hero1" 
-            style=' display: flex;
-                    flex-direction: column;
-                    padding: var(--padding-primary);
-                    align-items: center;
-                    justify-content: center;
-                    font-family: var(--font-family-primary);
-                    width:auto;
-                    min-height:80vh;
-                    '  >
-            {{ include('a_annonce/_form.html.twig') }}
+    <div class='container-fluid ' >
+    <div 
+                    class="hero1" 
+                    style=' display: flex;
+                            flex-direction: column;
+                            padding: var(--padding-primary);
+                            align-items: center;
+                            justify-content: center;
+                            font-family: var(--font-family-primary);
+                            width:auto;
+                            min-height:80vh;
+                            '  >
+        <div class="card">
+            <div class="card-header">
+                Ajouter un nouveaux annonce
+            </div>
+            <div class="card-body">    
+                {{ include('a_annonce/_form.html.twig') }}
+            </div>
+        </div>
         </div>
     </div>
     <a href="{{ path('app_annonce_index') }}">back to list</a>

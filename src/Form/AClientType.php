@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,11 +12,15 @@ class AClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('cnom')
-            ->add('cprenom')
-            ->add('cemail')
-            ->add('cmdp')
-            ->add('ctele')
+            ->add('cnom' ,TextType::class,[
+                'label' => 'Nom',
+            ] )
+            ->add('cprenom',TextType::class,[
+                'label' => 'Prénom',
+            ] )
+            ->add('ctele',TextType::class,[
+                'label' => 'Téléphone',
+            ] )
 
         ;
     }

@@ -1,0 +1,46 @@
+<div class="row-test mt-2-test">
+                <nav aria-label="col Page navigation example">
+                    <ul class="pagination-test justify-content-center-test">
+                        {% if page != 1 %}
+                            {% if searchdata is not defined %}
+                                <li class="page-item-test">
+                                    <a class="page-link-test" href="{{ path(nom_path,{page : page-1,nbre:nbre}) }}">Previous</a>
+                                </li>
+                                
+                            {% else %}
+                                <li class="page-item-test">
+                                    <a class="page-link-test" href="/home/resultat/{{ page-1 }}/{{ nbre }}??ville={{ searchdata.ville }}&type={{ searchdata.type }}&chambres={{ searchdata.chambres }}&surfaceMin={{ searchdata.surfaceMin }}&prixMax={{ searchdata.prixMax }}">Previous</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="page-item-test disabled">
+                                <a class="page-link-test ">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for i in range(1,nbrePage) %} 
+                            {% if searchdata is not defined %}
+                                <li class="page-item-test {% if page == i %} active-test {% endif %}"><a class="page-link-test" href="{{ path(nom_path,{page : i,nbre:nbre}) }}">{{ i }}</a></li>
+                            {% else %} 
+                                <li class="page-item-test{% if page == i %} active-test {% endif %}">
+                                    <a class="page-link-test" href="/home/resultat/{{ i }}/{{ nbre }}?ville={{ searchdata.ville }}&type={{ searchdata.type }}&chambres={{ searchdata.chambres }}&surfaceMin={{ searchdata.surfaceMin }}&prixMax={{ searchdata.prixMax }}">{{ i }}</a>
+                                </li>  
+                            {% endif %}
+                        {% endfor %}
+                        {% if page != nbrePage %}
+                            {% if searchdata is not defined %} 
+                                <li class="page-item-test">
+                                    <a class="page-link-test" href="{{ path(nom_path,{page : page+1,nbre:nbre}) }}">Next</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item-test">
+                                    <a class="page-link-test" href="/home/resultat/{{ page+1 }}/{{ nbre }}?ville={{ searchdata.ville }}&type={{ searchdata.type }}&chambres={{ searchdata.chambres }}&surfaceMin={{ searchdata.surfaceMin }}&prixMax={{ searchdata.prixMax }}">Next</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="page-item-test disabled">
+                                <a class="page-link-test ">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>

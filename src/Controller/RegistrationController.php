@@ -35,14 +35,13 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() /* && $form->isValid() */) {
+            dd($form);
             $clientData=$form->get('aClient')->getData();
 
             $client = new AClient();
             $client->setCnom($clientData['cnom']);
             $client->setCprenom($clientData['cprenom']);
-            $client->setCemail($clientData['cemail']);
-            $client->setCmdp($clientData['cmdp']);
             $client->setCtele($clientData['ctele']);
             $client->setCuser($user);
 
@@ -73,9 +72,9 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 $request
             );
-            return $this->render('registration/register.html.twig', [
-                'registrationForm' => $form->createView(),
-            ]);
+            // return $this->render('registration/register.html.twig', [
+            //     'registrationForm' => $form->createView(),
+            // ]);
         }
 
         return $this->render('registration/register.html.twig', [

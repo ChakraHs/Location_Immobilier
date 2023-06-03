@@ -19,25 +19,24 @@ use App\Services\UploadServices;
 #[Route('/proprietaire/annonce')]
 class AAnnonceController extends AbstractController
 {
-    #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
+    #[Route('/{page<\d+>?1}/{nbre<\d+>?6}', name: 'app_annonce_index', methods: ['GET'])]
     public function index(
-        Request $request,
         AAnnonceRepository $aAnnonceRepository , 
         ACategoryRepository $aCategoryRepository,
-        AImageRepository $aImageRepository): Response
+        AImageRepository $aImageRepository,
+        int $page,
+        int $nbre): Response
     {
-        $AImage = new AImage();
-        $form = $this->createForm(ImageType::class, $AImage);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-
-        }
+        $nbAnnonce = $aAnnonceRepository->count([]);
+        $nbrePage = ceil($nbAnnonce/$nbre);
         return $this->render('a_annonce/index.html.twig', [
-            'a_annonces' => $aAnnonceRepository->findAll(),
-            'categorys' => $aCategoryRepository->findAll(),
-            'AImages' => $aImageRepository->findAll(),
-            'form'=> $form,
+            // 'a_annonces' => $aAnnonceRepository->findAll(),
+            'a_annonces'    => $aAnnonceRepository->findBy([],[],$nbre,($page-1)*$nbre),
+            'categorys'     => $aCategoryRepository->findAll(),
+            'AImages'       => $aImageRepository->findAll(),
+            'page'          => $page,
+            'nbrePage'      => $nbrePage,
+            'nbre'          => $nbre,
         ]);
     }
 
@@ -81,7 +80,7 @@ class AAnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_annonce_show', methods: ['GET'])]
+    #[Route('/{id}/show', name: 'app_annonce_show', methods: ['GET'])]
     public function show(AAnnonce $aAnnonce): Response
     {
         return $this->render('a_annonce/show.html.twig', [

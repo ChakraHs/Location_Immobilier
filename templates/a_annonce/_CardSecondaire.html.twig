@@ -1,0 +1,23 @@
+<div class='Annonce-item-Secondaire'>
+    <div class='Annonce-wrapper-Secondaire'>
+        <div style="width: 350px;">
+            {{ include('a_annonce/_ImageSlider.html.twig') }}
+        </div>
+        {# <a href="{{ path('app_annonce_show', {'id': a_annonce.id}) }}"> #}
+            <div class="component-Secondaire" {{ react_component('Components/CardContentSecondaire/CardContentSecondaire',
+                {   'Category': a_annonce.acategory.catnom ,
+                    'Prix': a_annonce.aprix ,
+                    'Ville':a_annonce.aville ,
+                    'Rue':a_annonce.arue ,
+                    'NumImmo':a_annonce.anumimmo ,
+                    'Bedrooms':a_annonce.bedrooms ,
+                    'Bathrooms':a_annonce.bathrooms,
+                    'Surface':a_annonce.Surface ,
+                    'deleteUrl':deleteUrl,
+                    'csrf_token_id':csrf_token_id,
+                    'showUrl':showUrl,
+                    'editUrl':editUrl,
+                }) }}></div>
+        {# </a> #}
+    </div>
+</div>

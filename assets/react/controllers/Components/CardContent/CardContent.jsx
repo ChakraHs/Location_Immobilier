@@ -1,13 +1,16 @@
 import React from 'react'
 import '../../../../styles/CardContent.css'
 
-import { Deleteicon } from '../index'
+import { MyDropdown } from '../index'
+
 
 import { HiLocationMarker } from 'react-icons/hi'
 import { MdOutlineBedroomParent ,MdOutlineBathroom } from 'react-icons/md'
 import { TbHomeEdit } from 'react-icons/tb'
 
 const CardContent = ( props ) => {
+  var Bathrooms=true;
+  if(props.Bathrooms==0){Bathrooms=false;}
   return (
     <div className="Annonce-item-content">
           <div className="Annonce-item-content-immeuble">
@@ -23,7 +26,7 @@ const CardContent = ( props ) => {
               </div>
               <div className="donnee intern">
                 <div className="donnee-intern"> <MdOutlineBedroomParent/> { props.Bedrooms } bedrooms</div>
-                <div className="donnee-intern"> <MdOutlineBathroom/> { props.Bathrooms } bathrooms</div>
+                {Bathrooms && <div className="donnee-intern"> <MdOutlineBathroom/> { props.Bathrooms } bathrooms</div>}
                 <div className="donnee-intern">{ props.Surface } m<sup>2</sup></div>
               </div>
             </div>
@@ -31,8 +34,9 @@ const CardContent = ( props ) => {
               {/* <button className="config" onClick={handleAddImageClick}>
                 <BiImageAdd/>
               </button> */}
-              <a href={ props.editUrl } className="config edit"><TbHomeEdit/></a>
-              <Deleteicon deleteUrl={ props.deleteUrl } csrf_token_id={ props.csrf_token_id } />
+              <MyDropdown editUrl={ props.editUrl } deleteUrl={ props.deleteUrl } csrf_token_id={ props.csrf_token_id } />
+              {/* <a href={ props.editUrl } className="config edit"><TbHomeEdit/></a>
+              <Deleteicon deleteUrl={ props.deleteUrl } csrf_token_id={ props.csrf_token_id } /> */}
             </div>
           </div>
           <div className="Annonce-item-content-personel">
