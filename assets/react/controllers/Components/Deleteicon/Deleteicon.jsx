@@ -1,7 +1,5 @@
 import React from 'react'
-import '../../../../styles/CardContent.css'
-
-import { MdDeleteForever } from 'react-icons/md'
+import '../../../../styles/CardContentSecondaire.css'
 
 const Deleteicon = (props) => {
   return (
@@ -13,7 +11,7 @@ const Deleteicon = (props) => {
         }
         }>
         <input type="hidden" name="_token" value={ props.csrf_token_id }/>
-        <button className="config delete"><MdDeleteForever/></button>
+        <button className="config-Secondaire">Supprimer</button>
     </form>
   )
 }

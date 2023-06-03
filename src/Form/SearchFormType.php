@@ -5,6 +5,8 @@ namespace App\Form;
 use App\model\SearchForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,12 +20,23 @@ class SearchFormType extends AbstractType
             ->add('ville',TextType::class,[
                 'attr' => [
                     'placeholder' => 'Ville'
-                ]
+                ],
+                'required' => false,
             ])
-            ->add('type')
-            ->add('prixMax')
-            ->add('surfaceMin')
-            ->add('chambres')
+            ->add('type',TextType::class,[
+                'required' => false,
+            ])
+            ->add('prixMax',NumberType::class,[
+                'required' => false,
+                'html5' => true,
+            ])
+            ->add('surfaceMin',NumberType::class,[
+                'required' => false,
+                'html5' => true,
+            ])
+            ->add('chambres',IntegerType::class,[
+                'required' => false,
+            ])
 
 
             

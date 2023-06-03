@@ -40,7 +40,7 @@ class AAnnonceRepository extends ServiceEntityRepository
     }
 
 
-    public function findByParam($searchVille,$searchType,$searchChambres,$searchPrixMax,$searchSurfaceMin)
+    public function findByParam($searchVille,$searchType,$searchChambres,$searchPrixMax,$searchSurfaceMin,$offset,$limit)
     {
         $qb = $this->createQueryBuilder('p');
         $qb->leftJoin('p.acategory', 'c');
@@ -53,6 +53,8 @@ class AAnnonceRepository extends ServiceEntityRepository
                         $qb->expr()->gte('p.Surface', ':searchSurfaceMin')  
                     )
         )
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
             ->setParameter('searchVille', '%' . $searchVille . '%')
             ->setParameter('searchPrixMax',$searchPrixMax)
             ->setParameter('searchSurfaceMin',$searchSurfaceMin)
