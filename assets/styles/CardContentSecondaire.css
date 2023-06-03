@@ -1,0 +1,68 @@
+.Annonce-item-content-Secondaire
+{
+    height: 100%;
+}
+.Annonce-item-content-immeuble-Secondaire
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+}
+.Annonce-item-content-immeuble-donnee-Secondaire
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0px 20px;
+    height: 100%;
+    width: 100%;
+}
+.donnee-Secondaire
+{
+    padding-bottom: calc(var(--padding-secondary)/5) ;
+    padding-left: calc(var(--padding-secondary)/5) ;
+}
+.category-Secondaire
+{
+    font-size: x-large;
+    font-weight: 600;
+}
+.prix-Secondaire
+{
+    font-size: larger;
+    font-weight: bold;
+}
+.adresse-Secondaire
+{
+    font-weight:500;
+}
+.intern-Secondaire
+{
+    display: flex;
+    align-items: center;
+}
+.donnee-intern-Secondaire
+{
+    padding-right: var(--padding-secondary);
+}
+.Annonce-item-content-immeuble-config-Secondaire
+{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    padding-top: 15px;
+}
+.config-Secondaire
+{
+    /*padding: calc(var(--padding-secondary)/5); */
+    font-size: large;
+    background-color: transparent;
+    border: none;
+    padding-left: 0px;
+}
+.Annonce-item-content-path-Secondaire
+{
+    height: 100%;
+    width: 100%;
+}

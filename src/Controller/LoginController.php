@@ -16,11 +16,11 @@ class LoginController extends AbstractController
         ]);
     }
 
-    // #[Route('/HomeClient', name: 'home_client')]
-    // public function homeclient(): Response
-    // {
-    //     return $this->render('client/clienthome.html.twig', [
-    //         'controller_name' => 'LoginController',
-    //     ]);
-    // }
+    #[Route('/HomeClient', name: 'home_client')]
+    public function homeclient(): Response
+    {
+        return $this->render('client/clienthome.html.twig', [
+            'controller_name' => 'LoginController',
+        ]);
+    }
 }

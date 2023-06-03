@@ -22,12 +22,6 @@ class AProprietaire
     private ?string $pprenom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $pemail = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $pmdp = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $ptele = null;
 
     #[ORM\Column(length: 255)]
@@ -38,6 +32,9 @@ class AProprietaire
 
     #[ORM\OneToMany(mappedBy: 'aproprietaire', targetEntity: AAnnonce::class)]
     private Collection $pannonces;
+
+    #[ORM\OneToOne(inversedBy: 'aProprietaire', cascade: ['persist', 'remove'])]
+    private ?User $Puser = null;
 
     public function __construct()
     {
@@ -73,29 +70,6 @@ class AProprietaire
         return $this;
     }
 
-    public function getPemail(): ?string
-    {
-        return $this->pemail;
-    }
-
-    public function setPemail(string $pemail): self
-    {
-        $this->pemail = $pemail;
-
-        return $this;
-    }
-
-    public function getPmdp(): ?string
-    {
-        return $this->pmdp;
-    }
-
-    public function setPmdp(string $pmdp): self
-    {
-        $this->pmdp = $pmdp;
-
-        return $this;
-    }
 
     public function getPtele(): ?string
     {
@@ -165,5 +139,17 @@ class AProprietaire
     public function __toString()
     {
         return $this->getId();
+    }
+
+    public function getPuser(): ?User
+    {
+        return $this->Puser;
+    }
+
+    public function setPuser(?User $Puser): self
+    {
+        $this->Puser = $Puser;
+
+        return $this;
     }
 }

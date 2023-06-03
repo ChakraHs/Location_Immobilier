@@ -6,27 +6,35 @@
     <div class="row my-5">
         <div class="col-md-6 mx-auto">
             <div class="card">
-                <div class="card-header"> Register </div>
+                <div class="card-header"> Création compte client </div>
                 <div class="card-body">
                     {% for flash_error in app.flashes('verify_email_error') %}
                         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
                     {% endfor %}
 
-                    <h1>Register</h1>
-
                     {{ form_start(registrationForm) }}
+                        {# <div id="client" style="display: block;" >
+                            {{ form_widget(registrationForm.aClient) }}
+                            <input  type="hidden" name="aProprietaire" value="false" >
+                        </div>
+                        <div id="proprietaire"style="display:none;">
+                            {{ form_widget(registrationForm.aProprietaire) }}
+                            <input  type="hidden" name="aProprietaire" value="true" >
+                        </div> #}
+                        {{ form_widget(registrationForm.aClient) }}
                         {{ form_row(registrationForm.email) }}
                         {{ form_row(registrationForm.plainPassword, {
                             label: 'Password'
                         }) }}
                         {{ form_row(registrationForm.agreeTerms) }}
 
-                        {{ form_widget(registrationForm.aClient) }}
 
                         <button type="submit" class="btn btn-primary">Register</button>
                     {{ form_end(registrationForm) }}
                 </div>
+                
             </div>
+            <span>vous avez un proprietaire ?<button id="convertion_client_proprietaire" type="button" style="color: blue;text-decoration:underline;border: none;background-color: white;">cliquer ici</button></span>
         </div>
     </div>
 {% endblock %}

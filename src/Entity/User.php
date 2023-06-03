@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'Cuser', cascade: ['persist', 'remove'])]
     private ?AClient $aClient = null;
 
+    #[ORM\OneToOne(mappedBy: 'Puser', cascade: ['persist', 'remove'])]
+    private ?AProprietaire $aProprietaire = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->aClient = $aClient;
+
+        return $this;
+    }
+
+    public function getAProprietaire(): ?AProprietaire
+    {
+        return $this->aProprietaire;
+    }
+
+    public function setAProprietaire(?AProprietaire $aProprietaire): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($aProprietaire === null && $this->aProprietaire !== null) {
+            $this->aProprietaire->setPuser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($aProprietaire !== null && $aProprietaire->getPuser() !== $this) {
+            $aProprietaire->setPuser($this);
+        }
+
+        $this->aProprietaire = $aProprietaire;
 
         return $this;
     }

@@ -27,17 +27,108 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-        </li>#}
-        <li>
-            <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973;">
+        </li>#} 
+        {# <li class="nav-item d-flex align-items-center" style="padding-right:4px ;">
+            <div class="d-grid gap-2 mx-auto hero-search-button! " style="background-color:#dd7973;">
                 <a class="btn " type="button" style="color: white;
-                font-weight: bold; "> Se connecter</a>
+                font-weight: bold; " data-bs-toggle="modal" data-bs-target="#exampleModal"> S'inscrire</a>
+            </div>
+        </li> #}
+        <li class="nav-item d-flex align-items-center">
+            <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973;">
+                <button type="button" class="btn" style="color: white;
+                font-weight: bold;"data-bs-toggle="modal" data-bs-target="#exampleModalSeConnecter">Se connecter</button>
+                <!-- <a class="btn " type="button" style="color: white;
+                font-weight: bold; "> Se connecter</a> -->
             </div>
         </li>
     </ul>
 </div>
 </div>
 </nav>
+{# S'inscrire #}
+{# <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Welcome</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+        <h1>Register</h1>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+
+            {{ form_widget(registrationForm.aClient) }}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Register</button>
+        {{ form_end(registrationForm) }}
+        {# <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> 
+      </div>
+    </div>
+  </div>
+</div> #}
+{# Se connecter #}
+<div class="modal fade" id="exampleModalSeConnecter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Welcome  </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <label for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                    <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+                    <span>
+                        vous n'avez pas de compte ? <a style="color: blue;text-decoration:underline;" href="{{ path('app_register') }}">S'inscrire</a>
+                    </span>
+                    {#
+                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html
+
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                        </div>
+                    #}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-lg btn-primary my-2" type="submit">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+      {# <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> #}
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block body %}
@@ -62,8 +153,31 @@
             </div>
             <div class="hero-search" style="background-color: white; padding: 20px; border-radius: 10px; width:80%; padding-top:30px; padding-bottom:30px;">
             {{ include('home/_form.html.twig') }}
-
             </div>
+        </div>
+        <div class='container-fluid' style='padding:none;background-color: white;margin-top:100px;'>
+            <div class="Annonce-items">
+                {% for a_annonce in a_annonces %}
+                    {% set images = []  %}
+                    {% for AImage in AImages %}
+                        {% if AImage.iannonce.id == a_annonce.id %}
+                            {% set images= images|merge([AImage.image]) %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% set deleteUrl = path('app_annonce_delete', {'id': a_annonce.id}) %}
+                    {% set showUrl = path('app_annonce_show', {'id': a_annonce.id}) %}
+                    {% set editUrl = path('app_annonce_edit', {'id': a_annonce.id}) %}
+                    {% set csrf_token_id = csrf_token('delete' ~ a_annonce.id)  %}
+                    {{ include('a_annonce/_Card.html.twig') }}
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+            </div>
+            {% set nom_path = "app_home" %}
+            {{ include('home/_pagination.html.twig') }}
         </div>
     </div>
 {% endblock %}

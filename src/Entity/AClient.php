@@ -21,11 +21,11 @@ class AClient
     #[ORM\Column(length: 255)]
     private ?string $cprenom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $cemail = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $cemail = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $cmdp = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $cmdp = null;
 
     #[ORM\Column(length: 255)]
     private ?string $ctele = null;
@@ -70,29 +70,29 @@ class AClient
         return $this;
     }
 
-    public function getCemail(): ?string
-    {
-        return $this->cemail;
-    }
+    // public function getCemail(): ?string
+    // {
+    //     return $this->cemail;
+    // }
 
-    public function setCemail(string $cemail): self
-    {
-        $this->cemail = $cemail;
+    // public function setCemail(string $cemail): self
+    // {
+    //     $this->cemail = $cemail;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getCmdp(): ?string
-    {
-        return $this->cmdp;
-    }
+    // public function getCmdp(): ?string
+    // {
+    //     return $this->cmdp;
+    // }
 
-    public function setCmdp(string $cmdp): self
-    {
-        $this->cmdp = $cmdp;
+    // public function setCmdp(string $cmdp): self
+    // {
+    //     $this->cmdp = $cmdp;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCtele(): ?string
     {

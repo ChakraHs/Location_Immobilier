@@ -3,13 +3,12 @@
 {% block title %}AAnnonce{% endblock %}
 
 {% block body %}
-    <h1>AAnnonce</h1>
+    <h1><a href="{{ path('app_resultat_home') }}" class="btn"><img src="{{ asset('uploads/icons/arrow.png') }}" alt="" srcset="" class="img-thumbnail" style="width:50px;"></a></h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ a_annonce.id }}</td>
+                <td colspan="2"><img src="{{ asset('uploads/annonce_image/' ~ a_annonce.getAImages()[0].image) }}" alt="" srcset="" class="img-thumbnail" style="width:300px;"></td>
             </tr>
             <tr>
                 <th>Aprix</th>
@@ -35,12 +34,13 @@
                 <th>Atraite</th>
                 <td>{{ a_annonce.atraite }}</td>
             </tr>
+            <tr>
+                <td colspan="2" class="text-center"><a href="{{ path('app_resultat_reservation', {'annonce': a_annonce.id}) }}" class="btn btn-primary text-center">Reserver</a></td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_annonce_index') }}">back to list</a>
+    <!--<a href="{{ path('app_annonce_edit', {'id': a_annonce.id}) }}">edit</a> 
 
-    <a href="{{ path('app_annonce_edit', {'id': a_annonce.id}) }}">edit</a>
-
-    {{ include('a_annonce/_delete_form.html.twig') }}
+    {{ include('a_annonce/_delete_form.html.twig') }} -->
 {% endblock %}

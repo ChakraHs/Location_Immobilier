@@ -1,6 +1,0 @@
-.Annonce-item-image
-{
-    width: 100%;
-    border-top-left-radius: calc(var(--border-radius-secondary)/2);
-    border-top-right-radius: calc(var(--border-radius-secondary)/2);
-}
