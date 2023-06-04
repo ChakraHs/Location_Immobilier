@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AClient index{% endblock %}
+
+{% block body %}
+    <h1>AClient index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cnom</th>
+                <th>Cprenom</th>
+                <th>Ctele</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a_client in a_clients %}
+            <tr>
+                <td>{{ a_client.id }}</td>
+                <td>{{ a_client.cnom }}</td>
+                <td>{{ a_client.cprenom }}</td>
+                <td>{{ a_client.ctele }}</td>
+                <td>
+                    <a href="{{ path('app_a_client_entity_show', {'id': a_client.id}) }}">show</a>
+                    <a href="{{ path('app_a_client_entity_edit', {'id': a_client.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_a_client_entity_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New AClient{% endblock %}
+
+{% block body %}
+    <h1>Create new AClient</h1>
+
+    {{ include('a_client_entity/_form.html.twig') }}
+
+    <a href="{{ path('app_a_client_entity_index') }}">back to list</a>
+{% endblock %}

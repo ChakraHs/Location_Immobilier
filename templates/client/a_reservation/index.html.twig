@@ -2,46 +2,6 @@
 
 {% block title %}AReservation index{% endblock %}
 
-{% block nav %}
-                <div class="collapse navbar-collapse" id="navbarScroll" style="width:1200px;display:flex; align-items:flex-start;justify-content:flex-start; margin-top: 20px;">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <li class="nav-item">
-                            <a class="nav-link p-2 p-lg-2" 
-                            href="{{ path('client_index') }}">Accueil</a>
-                        </li>
-                        <li class="nav-item position-relative" style="margin-right:10px;">
-                            <a class="nav-link p-2 p-lg-2" 
-                            style="color: brown;"
-                            href="{{ path('client_reservation_index') }}">Mes locations</a>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                {{ a_reservations|length}}
-                            </span>
-                        </li>
-                        <li class="nav-item" style="margin-right:600px;">
-                            <a class="nav-link p-2 p-lg-2" href="{{ path('client_reservation_index') }}">Mon compte</a>
-                        </li>
-                        {#<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle p-2 p-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Link
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Se connecter </a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        #}
-                        <li>
-                            <div class="hero-search-button!" style="background-color:red; margin-top:10px;">
-                                <a class="btn " type="button" style="color: white;
-                                font-weight: bold; "> Se deconnecter</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-{% endblock %}
-
 {% block body %}
 <img src="../../assets/img/window-interior-decor.jpg" alt="" width="100%" style="position: absolute;top: -100px; z-index: -1;">
 <div class="container" style="background-color: white; margin-top: 20px; height: 54%; border-radius: 5px; padding: 10px;">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -18,7 +18,7 @@ class MailerService
     ): void
     {
         $email = (new Email())
-            ->from('imco12.service@gmail.com')
+            //->from('imco12.service@gmail.com')
             ->to($to)
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
