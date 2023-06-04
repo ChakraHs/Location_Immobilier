@@ -12,6 +12,8 @@
         -moz-appearance: textfield;
         }
     </style>
+    <div style="display:flex;">
+    <div style="width:100%">
     <div class="hero-search-3" style="width=100%;justify-content: space-between;">
         <div class="hero-search-input second-search margin-1" style="position: relative; width:72.7%;">
             <input 
@@ -25,7 +27,7 @@
             {% do formSearch.ville.setRendered %}
         </div>
 
-        <div class="hero-search-input second-search " style="width:30%;">
+        <div class="hero-search-input second-search " style="width:31%;">
             <select class="form-control form-control-sm" type="select" id='{{ formSearch.type.vars.id }}' name='{{ formSearch.type.vars.full_name }}' value='{{ formSearch.type.vars.value }}' placeholder="Type de propriete" aria-label=".form-control-sm example" style="font-family: inherit; color: var(--bs-secondary-color); display: block; 
         border: 1px solid #d7d6d6; 
         background: #fff; 
@@ -41,7 +43,7 @@
         </div>
     </div>
     <div class="hero-search-3" style="width=100%;justify-content: space-between;">
-        <div class="hero-search-input second-search margin-1" style="position: relative; width:30%;">
+        <div class="hero-search-input second-search margin-1" style="position: relative; width:31%;">
         <span class="unit" style="position: absolute;
         display: block; 
         right: 5px; 
@@ -82,9 +84,14 @@
         width: 100%; ">
             {% do formSearch.prixMax.setRendered %}
         </div>
-    </div>
-    <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:#dd7973; margin-top: 10px;">
+        <div class="d-grid gap-0 hero-search-button!" style="background-color:#EF5E4E; border-radius: 3px; margin-left:12px;">
         <button class="btn " type="submit" style="color: white;
-        font-weight: bold; "> Chercher</button>
+        font-weight: bold; "> <img src="../../assets/img/search.png" alt="" width="20px" style=""></button>
+        </div>
+    </div>
+    </div>
+    <div style=" display:flex; align-items:flex-start; justify-content:center; background-color:red; margin-left:20px;">
+    
+    </div>
     </div>
 {{ form_end(formSearch) }}
