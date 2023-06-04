@@ -1,11 +1,14 @@
-const convertion_client_proprietaire=document.getElementById('convertion_client_proprietaire');
-const formclient=document.getElementById('client');
-const formproprietaire=document.getElementById('proprietaire');
-
-let formDisplayed = false;
-
-convertion_client_proprietaire.addEventListener('click',()=>{
-    formDisplayed = !formDisplayed;
-    formclient.style.display= !formDisplayed ? 'block' : 'none';
-    formproprietaire.style.display= formDisplayed ? 'block' : 'none';
-})
+function ConvertClientPropriet()
+{
+    const formclient=document.getElementById('client');
+    const formproprietaire=document.getElementById('proprietaire');
+    formclient.style.display= none;
+    formproprietaire.style.display= 'block';
+}
+function ConvertProprietClient()
+{
+    const formclient=document.getElementById('client');
+    const formproprietaire=document.getElementById('proprietaire');
+    formproprietaire.style.display= none;
+    formclient.style.display= 'block';
+}

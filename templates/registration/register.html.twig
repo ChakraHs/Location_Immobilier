@@ -5,36 +5,59 @@
 {% block body %}
     <div class="row my-5">
         <div class="col-md-6 mx-auto">
-            <div class="card">
-                <div class="card-header"> Création compte client </div>
-                <div class="card-body">
+            <div class="card" >
+                <div class="card-header">
+                    <div class="Btn-box" {# style="display: flex;justify-content: center;" #}>
+                <button {# style="background-color: transparent;
+                border: none;
+                outline: none;
+                padding: 14px 16px;
+                font-weight: bold;
+                font-size: 20px;" #} id="convertion_client_proprietaire" type="button" onclick="ConvertClientPropriet()">Client</button>
+                <button {# style="background-color: transparent;
+                border: none;
+                outline: none;
+                padding: 14px 16px;
+                font-weight: bold;
+                font-size: 20px;" #} id="convertion_proprietaire_client" type="button" onclick="ConvertProprietClient()" >Proprietaire</button>
+            </div>
+                </div>
+                <div class="card-body" id="client" style="display: block;">
                     {% for flash_error in app.flashes('verify_email_error') %}
                         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
                     {% endfor %}
 
-                    {{ form_start(registrationForm) }}
-                        {# <div id="client" style="display: block;" >
-                            {{ form_widget(registrationForm.aClient) }}
-                            <input  type="hidden" name="aProprietaire" value="false" >
-                        </div>
-                        <div id="proprietaire"style="display:none;">
-                            {{ form_widget(registrationForm.aProprietaire) }}
-                            <input  type="hidden" name="aProprietaire" value="true" >
-                        </div> #}
-                        {{ form_widget(registrationForm.aClient) }}
-                        {{ form_row(registrationForm.email) }}
-                        {{ form_row(registrationForm.plainPassword, {
+                    {{ form_start(registrationFormClient) }}
+                        {{ form_widget(registrationFormClient.aClient) }}
+                        {{ form_row(registrationFormClient.email) }}
+                        {{ form_row(registrationFormClient.plainPassword, {
                             label: 'Password'
                         }) }}
-                        {{ form_row(registrationForm.agreeTerms) }}
+                        {{ form_row(registrationFormClient.agreeTerms) }}
 
 
                         <button type="submit" class="btn btn-primary">Register</button>
-                    {{ form_end(registrationForm) }}
+                    {{ form_end(registrationFormClient) }}
                 </div>
-                
+                <div class="card-body" id="proprietaire"style="display:none;">
+                    {% for flash_error in app.flashes('verify_email_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                    {% endfor %}
+
+                    {{ form_start(registrationFormProprietaire) }}
+                        {{ form_widget(registrationFormProprietaire.aProprietaire) }}
+                        {{ form_row(registrationFormProprietaire.email) }}
+                        {{ form_row(registrationFormProprietaire.plainPassword, {
+                            label: 'Password'
+                        }) }}
+                        {{ form_row(registrationFormProprietaire.agreeTerms) }}
+
+
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    {{ form_end(registrationFormProprietaire) }}
+                </div>
+                <!-- <span>vous avez un proprietaire ?</span><button id="convertion_client_proprietaire" type="button" style="color: blue;text-decoration:underline;border: none;background-color: white;">cliquer ici</button> -->
             </div>
-            <span>vous avez un proprietaire ?<button id="convertion_client_proprietaire" type="button" style="color: blue;text-decoration:underline;border: none;background-color: white;">cliquer ici</button></span>
-        </div>
     </div>
+    
 {% endblock %}

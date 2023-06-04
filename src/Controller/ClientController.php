@@ -6,7 +6,7 @@ use App\Entity\AReservation;
 use App\Form\AReservationType;
 use App\Repository\AReservationRepository;
 use App\Repository\AAnnonceRepository;
-use App\Service\MailerService;
+use App\Services\MailerService;
 use App\Service\PdfService;
 use mPDF;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
