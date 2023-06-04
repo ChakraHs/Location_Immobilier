@@ -29,18 +29,16 @@ class APropriertaireType extends AbstractType
             ] )
             ->add('pcinimage',FileType::class,[
                 'label' => 'Carte Nationnale',
-                'multiple' => true,
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        // 'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/gif',
-                            'image/jpeg',
-                            'image/jpg',
+                            'application/pdf',
+                            'application/x-pdf',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid Image',
+                        'mimeTypesMessage' => 'Please upload a valid pdf',
                     ])
                 ],
             ] )

@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\AClient;
+use App\Entity\AProprietaire;
 use App\Entity\User;
+use App\Form\RegistrationFormProprietaireType;
 use App\Form\RegistrationFormType;
 use App\Security\AppCustomAuthenticator;
 use App\Security\EmailVerifier;
+use App\Services\UploadServices;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,27 +32,34 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(
+        Request $request, 
+        UserPasswordHasherInterface $userPasswordHasher, 
+        UserAuthenticatorInterface $userAuthenticator, 
+        AppCustomAuthenticator $authenticator, 
+        EntityManagerInterface $entityManager,
+        UploadServices $uploadServices): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        $formClient = $this->createForm(RegistrationFormType::class, $user);
+        $formClient->handleRequest($request);
+        $formProprietaire = $this->createForm( RegistrationFormProprietaireType::class, $user);
+        $formProprietaire->handleRequest($request);
 
-        if ($form->isSubmitted() /* && $form->isValid() */) {
-            dd($form);
-            $clientData=$form->get('aClient')->getData();
+        if ($formClient->isSubmitted() && $formClient->isValid()) {
+            $clientData=$formClient->get('aClient')->getData();
 
             $client = new AClient();
             $client->setCnom($clientData['cnom']);
             $client->setCprenom($clientData['cprenom']);
             $client->setCtele($clientData['ctele']);
             $client->setCuser($user);
-
+            $user->setRoles(["ROLE_CLIENT"]);
             //encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $formClient->get('plainPassword')->getData()
                 )
             );
 
@@ -76,9 +86,57 @@ class RegistrationController extends AbstractController
             //     'registrationForm' => $form->createView(),
             // ]);
         }
+        if ($formProprietaire->isSubmitted() && $formProprietaire->isValid()) {
+            $proprietaireData=$formProprietaire->get('aProprietaire');
 
+            $proprietaire = new AProprietaire();
+            $proprietaire->setPnom($proprietaireData->get('pnom')->getData());
+            $proprietaire->setPprenom($proprietaireData->get('pprenom')->getData());
+            $proprietaire->setPtele($proprietaireData->get('ptele')->getData());
+            $proprietaire->setPcin($proprietaireData->get('pcin')->getData());
+            $proprietaire->setPuser($user);
+            $pdf=$proprietaireData->get('pcinimage')->getData();
+            if($pdf)
+            {
+                $directory= $this->getParameter('Propritaire_Pdf_directory');
+                $proprietaire->setPcinimage($uploadServices->uploadFile($pdf,$directory));
+            }
+            
+            $user->setRoles(["ROLE_PROPRIETAIRE"]);
+            //encode the plain password
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $formProprietaire->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager->persist($user);
+            $entityManager->persist($proprietaire);
+            $entityManager->flush();
+
+            // generate a signed url and email it to the user
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('imco12.service@gmail.com', 'imco'))
+                    ->to($user->getEmail())
+                    ->subject('Please Confirm your Email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            );
+            // do anything else you need here, like send an email
+
+            return $userAuthenticator->authenticateUser(
+                $user,
+                $authenticator,
+                $request
+            );
+            // // return $this->render('registration/register.html.twig', [
+            // //     'registrationForm' => $form->createView(),
+            // // ]);
+        }
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'registrationFormClient' => $formClient->createView(),
+            'registrationFormProprietaire' => $formProprietaire->createView(),
         ]);
     }
 

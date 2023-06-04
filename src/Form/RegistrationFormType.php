@@ -12,7 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use App\Form\APropriertaireType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -46,11 +45,6 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('aClient', AClientType::class,[
-                'mapped' => false,
-                'required' => false,
-                'by_reference' => false,    
-            ])
-            ->add('aProprietaire', APropriertaireType::class,[
                 'mapped' => false,
                 'required' => false,
                 'by_reference' => false,    

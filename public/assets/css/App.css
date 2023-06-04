@@ -250,3 +250,44 @@ a
     border-top-right-radius: var(--bs-pagination-border-radius);
     border-bottom-right-radius: var(--bs-pagination-border-radius);
   }
+
+.Btn-box
+{
+  display: flex;
+  justify-content: center;
+}
+#convertion_client_proprietaire
+{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  font-weight: bold;
+  font-size: 20px;
+}
+#convertion_client_proprietaire:hover
+{
+  color: #dd7973;
+}
+#convertion_client_proprietaire:active
+{
+  color: #dd7973;
+}
+#convertion_proprietaire_client
+{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#convertion_proprietaire_client:hover
+{
+  color: #dd7973;
+}
+#convertion_proprietaire_client:active
+{
+  color: #dd7973;
+}

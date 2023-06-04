@@ -10,7 +10,7 @@ function MyDropdown(props) {
   
         <Dropdown.Menu>
           <Dropdown.Item href={ props.editUrl }>Modifier</Dropdown.Item>
-          <Dropdown.Item><Deleteicon deleteUrl={ props.deleteUrl } csrf_token_id={ props.csrf_token_id } /></Dropdown.Item>
+          <Deleteicon deleteUrl={ props.deleteUrl } csrf_token_id={ props.csrf_token_id } />
         </Dropdown.Menu>
       </Dropdown>
     )
