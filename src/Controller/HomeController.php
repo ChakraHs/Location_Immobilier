@@ -6,6 +6,7 @@ use App\Entity\AAnnonce;
 use App\model\SearchForm;
 use App\Repository\AAnnonceRepository;
 use App\Repository\ACategoryRepository;
+use App\Repository\AReservationRepository;
 use App\Repository\AImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ class HomeController extends AbstractController
         AAnnonceRepository $aAnnonceRepository,
         ACategoryRepository $aCategoryRepository,
         AImageRepository $aImageRepository,
+        AReservationRepository $aReservationRepository,
         int $page,
         int $nbre,
         AuthenticationUtils $authenticationUtils): Response
@@ -91,6 +93,9 @@ class HomeController extends AbstractController
         }
         $nbAnnonce = $aAnnonceRepository->count([]);
         $nbrePage = ceil($nbAnnonce/$nbre);
+        $reservationClient=null;
+        if($this->getUser())
+        $reservationClient = $this->getUser()->getAClient()->getCreservations();
         return $this->render('home/index.html.twig', [
             'formSearch'=>$formSearch->createView(),
             'a_annonces'    => $aAnnonceRepository->findBy([],[],$nbre,($page-1)*$nbre),
@@ -101,6 +106,8 @@ class HomeController extends AbstractController
             'nbre'          => $nbre,
             'last_username' => $lastUsername,
             'error'         => $error,
+            'a_reservations' => $reservationClient,
+            'page' => 1,
 
 
             'registrationForm' => $form->createView(),

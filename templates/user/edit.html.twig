@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <div class='container-fluid ' >
+    <div 
+                    class="hero1" 
+                    style=' display: flex;
+                            flex-direction: column;
+                            padding: var(--padding-primary);
+                            align-items: center;
+                            justify-content: center;
+                            font-family: var(--font-family-primary);
+                            width:auto;
+                            min-height:80vh;
+                            '  >
+        <div class="card">
+            <div class="card-header">
+                Modifier compte
+            </div>
+            <div class="card-body">    
+                {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+        </div>
+        </div>
+    </div>
+
+    {# <a href="{{ path('app_user_index') }}">back to list</a> #}
+
+    {# {{ include('user/_delete_form.html.twig') }} #}
+{% endblock %}

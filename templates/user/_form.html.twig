@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+
+    <div class="hero-search-input margin-0" style="display:flex; flex-direction:row; gap:20px;">
+        <span>Nom</span>
+        <input class="form-control form-control-sm" type="text" id='{{ form.aClient.cnom.vars.id }}' name='{{ form.aClient.cnom.vars.full_name }}' value='{{ app.getUser().getAClient().getCnom() }}' aria-label=".form-control-sm example">
+        {% do form.aClient.cnom.setRendered %}
+    </div>
+    <div class="hero-search-3">
+        <div class="hero-search-input second-search margin-1" style="display:flex; flex-direction:row; gap:20px;">
+            <span>Prenom</span>
+            <input class="form-control form-control-sm" type="text" id='{{ form.aClient.cprenom.vars.id }}' name='{{ form.aClient.cprenom.vars.full_name }}' value='{{ app.getUser().getAClient().getCprenom() }}' aria-label=".form-control-sm example">
+            {% do form.aClient.cprenom.setRendered %}
+        </div>
+        <div class="hero-search-input second-search margin-2" style="display:flex; flex-direction:row; gap:20px;">
+            <span>Telephone</span>
+            <input class="form-control form-control-sm" type="text" id='{{ form.aClient.ctele.vars.id }}' name='{{ form.aClient.ctele.vars.full_name }}' value='{{ app.getUser().getAClient().getCtele() }}' aria-label=".form-control-sm example">
+            {% do form.aClient.ctele.setRendered %}
+        </div>
+    </div>
+    <button class="btn btn-primary" data-collection-holder-class="tags">{{ button_label|default('Save') }}</button>
+    {# {{ dump(form) }} #}
+{{ form_end(form) }}

@@ -17,9 +17,55 @@
         {% endblock %}
     </head>
     <body style='height:auto;background-color: white;'>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('app_home') }}" style="font-weight: bold; color:#EF5E4E;"> Logo </a>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="width:100%;">
+            <div class="container" style="width:65%;">
+                <a class="navbar-brand" href="{{ path('app_home') }}" style="font-weight: 700; color:#EF5E4E; font-size:36px; font-family: var(--styleguide-font-family);"> Logo </a>
+
+                {% if app.getUser() %}
+                    {% if app.getUser().getRoles()[0] == "ROLE_CLIENT" %}
+                        <div class="collapse navbar-collapse" id="navbarScroll" style="width:100%;display:flex; align-items:flex-start;justify-content:flex-start; margin-top:0px;">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                <li class="nav-item" style="display:flex;">
+                                    <a class="nav-link p-2 p-lg-2" 
+                                    {% if page == 1 %} style="color: brown;" {% endif %}
+                                    href="{{ path('app_home') }}">Accueil</a>
+                                </li>
+                                <li class="nav-item position-relative" style="margin-right:10px;">
+                                    <a class="nav-link p-2 p-lg-2" 
+                                    {% if page == 2 %} style="color: brown;" {% endif %}
+                                    href="{{ path('client_reservation_index') }}">Mes locations</a>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ app.getUser().getAClient().getCreservations()|length}}
+                                    </span>
+                                </li>
+                                <li class="nav-item" style="margin-right:400px;">
+                                    <a class="nav-link p-2 p-lg-2" 
+                                    {% if page == 3 %} style="color: brown;" {% endif %}
+                                    href="{{ path('app_user_show',{'id': app.getUser().getId()}) }}">Mon compte</a>
+                                </li>
+                                <li>
+                                    <div class="hero-search-button!" style="background-color:transparent; margin-top:0px;">
+                                        <a class="btn" type="button" style="color: red;
+                                        font-weight: 400; " href="{{ path("app_logout") }}"> Se deconnecter</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                            <li class="nav-item d-flex align-items-center">
+                                <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:transparent; border:1px solid #EF5E4E;">
+                                    <button type="button" class="btn" style="color: #EF5E4E;
+                                    font-weight: bold;"data-bs-toggle="modal" data-bs-target="#exampleModalSeConnecter">Se connecter</button>
+                                    <!-- <a class="btn " type="button" style="color: white;
+                                    font-weight: bold; "> Se connecter</a> -->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
                 {% block nav %}{% endblock %}
             </div>
         </nav>

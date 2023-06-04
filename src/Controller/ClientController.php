@@ -2,11 +2,16 @@
 
 namespace App\Controller;
 
+
+use App\Entity\AClient;
+use App\Form\AClient1Type;
+use App\Repository\AClientRepository;
+
 use App\Entity\AReservation;
 use App\Form\AReservationType;
 use App\Repository\AReservationRepository;
 use App\Repository\AAnnonceRepository;
-use App\Service\MailerService;
+use App\Services\MailerService;
 use App\Service\PdfService;
 use mPDF;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,8 +19,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Knp\Snappy\Pdf;
+
+use Symfony\Component\Mime\Address;
 
 
 #[Route('/client')]
@@ -32,16 +42,43 @@ class ClientController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/edit', name: 'app_a_client_entity_edit', methods: ['GET', 'POST'])]
+    public function editClient(Request $request, AClient $aClient, AClientRepository $aClientRepository): Response
+    {
+        $form = $this->createForm(AClient1Type::class, $aClient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $aClientRepository->save($aClient, true);
+
+            return $this->redirectToRoute('app_a_client_entity_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('a_client_entity/edit.html.twig', [
+            'a_client' => $aClient,
+            'form' => $form,
+            'page'=> 3,
+        ]);
+    }
+
 
 
     #[Route('/email' , name: 'email', methods: ['GET'])]
-    public function mail(AReservationRepository $aReservationRepository, MailerService $mailer): Response
+    public function mail(AReservationRepository $aReservationRepository, MailerInterface $mailer): Response
     {
         if(!$this->getUser()){
             return $this->redirectToRoute('app_home');
         }
 
-        $mailer->sendEmail();
+        $email = (new Email())
+        ->from('imco12.service@gmail.com') // Sender email and name
+        ->to('hussien.chakra@gmail.com') // Recipient email address
+        ->subject('Test Email') // Email subject
+        ->text('This is a test email.'); // Plain text content
+
+    // Send the email using the MailerInterface
+    $mailer->send($email);
+
         return $this->render('client/clienthome.html.twig', [
             'a_reservations' => $this->getUser()->getAClient()->getCreservations(),
         ]);
@@ -91,6 +128,7 @@ class ClientController extends AbstractController
             'a_reservations' => $this->getUser()->getAClient()->getCreservations(),
             'a_annonces'=> $aAnnonceRepository->findAll(),
             'user'=>$this->getUser(),
+            'page' => 2,
         ]);
     }
 
