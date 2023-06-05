@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="width:100%;">
             <div class="container" style="width:65%;">
                 <a class="navbar-brand" href="{{ path('app_home') }}" style="font-weight: 700; color:#EF5E4E; font-size:36px; font-family: var(--styleguide-font-family);"> Logo </a>
-
+                {% set currentRoute = app.request.attributes.get('_route') %}
                 {% if app.getUser() %}
                     {% if app.getUser().getRoles()[0] == "ROLE_CLIENT" %}
                         <div class="collapse navbar-collapse" id="navbarScroll" style="width:100%;display:flex; align-items:flex-start;justify-content:flex-start; margin-top:0px;">
@@ -51,24 +51,107 @@
                                 </li>
                             </ul>
                         </div>
+                    {% elseif app.getUser().getRoles()[0] == "ROLE_PROPRIETAIRE" %}
+                        {% set Accueil_Annonce=[] %}
+                        {% for annonce in app.getUser().getAProprietaire().getPannonces() %}
+                            {% if annonce.aetat == 'false' %}
+                                {% set Accueil_Annonce = Accueil_Annonce |merge([annonce])  %}
+                            {% endif %}
+                        {% endfor %}
+                        {% set locataire_Annonce=[] %}
+                        {% for annonce in app.getUser().getAProprietaire().getPannonces() %}
+                            {% if annonce.aetat == 'true' %}
+                                {% set locataire_Annonce = locataire_Annonce |merge([annonce])  %}
+                            {% endif %}
+                        {% endfor %}
+                        <div class="collapse navbar-collapse" id="navbarScroll" style="width:100%;display:flex; align-items:flex-start;justify-content:flex-start; margin-top:0px;">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                <li class="nav-item position-relative" style="display:flex;">
+                                    <a class="nav-link  p-2 p-lg-2" 
+                                    {% if p == 1 %} style="color: brown;" {% endif %}
+                                    href="{{ path('app_annonce_accueil') }}">Accueil</a>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ Accueil_Annonce|length}}
+                                    </span>
+                                </li>
+                                <li class="nav-item position-relative" style="margin-right:10px;">
+                                    <a class="nav-link p-2 p-lg-2" 
+                                    {% if p == 2 %} style="color: brown;" {% endif %}
+                                    href="{{ path('app_annonce_locataires') }}">Mes locataires</a>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ locataire_Annonce|length}}
+                                    </span>
+                                </li>
+                                <li class="nav-item" style="margin-right:400px;">
+                                    <a class="nav-link p-2 p-lg-2" 
+                                    {% if p == 3 %} style="color: brown;" {% endif %}
+                                    href="{{ path('app_user_show',{'id': app.getUser().getId()}) }}">Mon compte</a>
+                                </li>
+                                <li>
+                                    <div class="hero-search-button!" style="background-color:transparent; margin-top:0px;">
+                                        <a class="btn" type="button" style="color: red;
+                                        font-weight: 400; " href="{{ path("app_logout") }}"> Se deconnecter</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     {% endif %}
                 {% else %}
-                    <div class="collapse navbar-collapse" id="navbarScroll">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                            <li class="nav-item d-flex align-items-center">
-                                <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:transparent; border:1px solid #EF5E4E;">
-                                    <button type="button" class="btn" style="color: #EF5E4E;
-                                    font-weight: bold;"data-bs-toggle="modal" data-bs-target="#exampleModalSeConnecter">Se connecter</button>
-                                    <!-- <a class="btn " type="button" style="color: white;
-                                    font-weight: bold; "> Se connecter</a> -->
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    {% if currentRoute != 'app_register' and currentRoute != 'app_login' %}
+                        <div class="collapse navbar-collapse" id="navbarScroll">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                <li class="nav-item d-flex align-items-center">
+                                    <div class="d-grid gap-2 mx-auto hero-search-button!" style="background-color:transparent; border:1px solid #EF5E4E;">
+                                        <button type="button" class="btn" style="color: #EF5E4E;
+                                        font-weight: bold;"data-bs-toggle="modal" data-bs-target="#exampleModalSeConnecter">Se connecter</button>
+                                        <!-- <a class="btn " type="button" style="color: white;
+                                        font-weight: bold; "> Se connecter</a> -->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal fade" id="exampleModalSeConnecter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Welcome  </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form method="post">
+                                        <div class="modal-body">
+                                            {% if error %}
+                                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                            {% endif %}
+
+                                            {% if app.user %}
+                                                <div class="mb-3">
+                                                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                                </div>
+                                            {% endif %}
+                                            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                                            <label for="inputEmail">Email</label>
+                                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                            <label for="inputPassword">Password</label>
+                                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                            <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+                                            <span>
+                                                vous n'avez pas de compte ? <a style="color: blue;text-decoration:underline;" href="{{ path('app_register') }}">S'inscrire</a>
+                                            </span>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-lg btn-primary my-2" type="submit">
+                                                Sign in
+                                            </button>
+                                        </div>
+                                    </form>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
                 {% block nav %}{% endblock %}
             </div>
         </nav>
+        </div>
         {% for message in app.session.flashbag.get('succes') %}
             <div class='alert alert-success'>
                 {{ message }}

@@ -86,7 +86,6 @@ a
 
 .Annonce-item-image
 {
-    height: 250px;
     border-top-left-radius: calc(var(--border-radius-secondary)/2);
     border-top-right-radius: calc(var(--border-radius-secondary)/2);
 }
@@ -290,4 +289,41 @@ a
 #convertion_proprietaire_client:active
 {
   color: #dd7973;
+}
+
+
+/* Show Annonce */
+.content-show
+{
+  display: flex;
+  flex-direction: column;
+}
+.content-show-title
+{
+  font-size: larger;
+  margin: 15px 30px;
+}
+.title1
+{
+  font-weight: bold;
+  font-size: x-large;
+}
+.title2
+{
+  margin: 10px 15px
+}
+.transfere_maj
+{
+  text-transform: capitalize;
+}
+.content-show-secondaire
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.image_show
+{
+  width: 800px;
+  height: 500px;
 }

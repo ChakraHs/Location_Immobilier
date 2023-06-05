@@ -3,43 +3,76 @@
 {% block title %}AAnnonce{% endblock %}
 
 {% block body %}
-    <h1><a href="{{ path('app_resultat_home') }}" class="btn"><img src="{{ asset('uploads/icons/arrow.png') }}" alt="" srcset="" class="img-thumbnail" style="width:50px;"></a></h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <td colspan="2"><img src="{{ asset('uploads/annonce_image/' ~ a_annonce.getAImages()[0].image) }}" alt="" srcset="" class="img-thumbnail" style="width:300px;"></td>
-            </tr>
-            <tr>
-                <th>Aprix</th>
-                <td>{{ a_annonce.aprix }}</td>
-            </tr>
-            <tr>
-                <th>Aville</th>
-                <td>{{ a_annonce.aville }}</td>
-            </tr>
-            <tr>
-                <th>Arue</th>
-                <td>{{ a_annonce.arue }}</td>
-            </tr>
-            <tr>
-                <th>Anumimmo</th>
-                <td>{{ a_annonce.anumimmo }}</td>
-            </tr>
-            <tr>
-                <th>Aetat</th>
-                <td>{{ a_annonce.aetat }}</td>
-            </tr>
-            <tr>
-                <th>Atraite</th>
-                <td>{{ a_annonce.atraite }}</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-center"><a href="{{ path('app_resultat_reservation', {'annonce': a_annonce.id}) }}" class="btn btn-primary text-center">Reserver</a></td>
-            </tr>
-        </tbody>
-    </table>
-
+    {% set images = []  %}
+    {% for AImage in AImages %}
+        {% if AImage.iannonce.id == a_annonce.id %}
+            {% set images= images|merge([AImage.image]) %}
+        {% endif %}
+    {% endfor %}
+    <div class="content" style="width: 80%;margin:auto;">
+        <div class="content-show">
+            <div class="content-show-title">
+                <div class="title1"><span class="transfere_maj">{{ a_annonce.acategory }}</span> {{ a_annonce.Surface }}m<sup>2</sup> <span class="transfere_maj">{{ a_annonce.aville }}</span></div>
+                <div class="title2"><span class="transfere_maj">{{ a_annonce.acategory }}</span> à Louer à <span class="transfere_maj">{{ a_annonce.aville }}</span></div>
+            </div>
+            {% set height = '500px' %}
+            <div class="content-show-secondaire">
+                <div class="image_show">
+                    {{ include('a_annonce/_ImageSlider.html.twig') }}
+                </div>
+                <div class="card" style="width: 400px; height: 200px;margin-left: 20px;margin-top: 20px;">
+                    <div class="content-show-donnee" style="display:flex ;flex-direction: row;justify-content: flex-start;" >
+                        <div class="card-body" style="display: flex;flex-direction: column;justify-content: space-around;">
+                            <h5 class="card-title">{{ a_annonce.acategory }} </h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{ a_annonce.aprix }} <span>MAD/Mois</span></h6>
+                            <p class="card-text">à {{ a_annonce.anumimmo }} {{ a_annonce.arue }} {{ a_annonce.aville }}</p>
+                        </div>
+                        {% if app.getUser() and app.getUser().getRoles()[0] == "ROLE_PROPRIETAIRE" %}
+                            <div class="dropdown" style="padding: 5px;">
+                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ path('app_annonce_edit', {'id': a_annonce.id}) }}">Modifier</a></li>
+                                    <li>{{ include('a_annonce/_delete_form.html.twig') }}</li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if app.getUser() and app.getUser().getRoles()[0] == "ROLE_PROPRIETAIRE" %}
+                        
+                    {% else %}
+                        <div class="d-grid gap-2 col-2 mx-auto">
+                            <a href="{{ path('app_resultat_reservation', {'annonce': a_annonce.id}) }}" class="btn btn-primary text-center">Reserver</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Prix par mois :</th>
+                    <td>{{ a_annonce.aprix }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse de <span class="transfere_maj">{{ a_annonce.acategory }}</span></th>
+                    <td>{{ a_annonce.anumimmo }} {{ a_annonce.arue }} {{ a_annonce.aville }}</td>
+                </tr>
+                <tr>
+                    <th>Nombres des chambres</th>
+                    <td>{{ a_annonce.bedrooms }}</td>
+                </tr>
+                <tr>
+                    <th>Salles de bain</th>
+                    <td>{{ a_annonce.bathrooms }}</td>
+                </tr>
+                <tr>
+                    <th>Surface</th>
+                    <td>{{ a_annonce.Surface }}m<sup>2</sup></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <!--<a href="{{ path('app_annonce_edit', {'id': a_annonce.id}) }}">edit</a> 
 
     {{ include('a_annonce/_delete_form.html.twig') }} -->
