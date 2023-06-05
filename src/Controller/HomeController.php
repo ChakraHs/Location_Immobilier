@@ -31,7 +31,10 @@ class HomeController extends AbstractController
         int $nbre,
         AuthenticationUtils $authenticationUtils): Response
     {
-
+        if($this->getUser()->getRoles()[0]=='ROLE_PROPRIETAIRE')
+        {
+            return $this->redirectToRoute('app_annonce_accueil');
+        }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);

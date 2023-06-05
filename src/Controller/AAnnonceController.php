@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use App\Services\UploadServices;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[Route('/proprietaire/annonce')]
 class AAnnonceController extends AbstractController
@@ -37,6 +38,49 @@ class AAnnonceController extends AbstractController
             'page'          => $page,
             'nbrePage'      => $nbrePage,
             'nbre'          => $nbre,
+            'p'             =>1,
+        ]);
+    }
+    #[Route('/locataires/{page<\d+>?1}/{nbre<\d+>?6}', name: 'app_annonce_locataires', methods: ['GET'])]
+    public function locataires(
+        AAnnonceRepository $aAnnonceRepository , 
+        ACategoryRepository $aCategoryRepository,
+        AImageRepository $aImageRepository,
+        int $page,
+        int $nbre): Response
+    {
+        $nbAnnonce = $aAnnonceRepository->count([]);
+        $nbrePage = ceil($nbAnnonce/$nbre);
+        return $this->render('a_annonce/locatairesIndex.html.twig', [
+            'a_annonces'    => $aAnnonceRepository->findBy(['aetat'=>'true'],[],$nbre,($page-1)*$nbre),
+            'categorys'     => $aCategoryRepository->findAll(),
+            'AImages'       => $aImageRepository->findAll(),
+            'page'          => $page,
+            'nbrePage'      => $nbrePage,
+            'nbre'          => $nbre,
+            'p'             =>2,
+        ]);
+    }
+
+    #[Route('/accueil/{page<\d+>?1}/{nbre<\d+>?6}', name: 'app_annonce_accueil', methods: ['GET'])]
+    public function accueil(
+        AAnnonceRepository $aAnnonceRepository , 
+        ACategoryRepository $aCategoryRepository,
+        AImageRepository $aImageRepository,
+        int $page,
+        int $nbre): Response
+    {
+        $nbAnnonce = $aAnnonceRepository->count([]);
+        $nbrePage = ceil($nbAnnonce/$nbre);
+        return $this->render('a_annonce/index.html.twig', [
+            // 'a_annonces' => $aAnnonceRepository->findAll(),
+            'a_annonces'    => $aAnnonceRepository->findBy(['aetat'=>'false'],[],$nbre,($page-1)*$nbre),
+            'categorys'     => $aCategoryRepository->findAll(),
+            'AImages'       => $aImageRepository->findAll(),
+            'page'          => $page,
+            'nbrePage'      => $nbrePage,
+            'nbre'          => $nbre,
+            'p'             =>1,
         ]);
     }
 
@@ -50,8 +94,7 @@ class AAnnonceController extends AbstractController
         $form = $this->createForm(AAnnonceType::class, $aAnnonce);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() /* && $form->isValid() */ ) {
-            //dd($form->get('aImages')->get('__name__')->get('image')->getData());
+        if ($form->isSubmitted() && $form->isValid() ) {
             $images = $form->get('aImages')->get('__name__')->get('image')->getData() ;
             if ($images) {
                 $directory= $this->getParameter('Annonce_image_directory');
@@ -80,11 +123,21 @@ class AAnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/show', name: 'app_annonce_show', methods: ['GET'])]
-    public function show(AAnnonce $aAnnonce): Response
+    #[Route('/{id}/show/{p<\d+>?1}', name: 'app_annonce_show', methods: ['GET','POST'])]
+    public function show(
+        AAnnonce $aAnnonce,
+        AImageRepository $aImageRepository,
+        int $p,
+        AuthenticationUtils $authenticationUtils): Response
     {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('a_annonce/show.html.twig', [
-            'a_annonce' => $aAnnonce,
+            'a_annonce'     => $aAnnonce,
+            'AImages'       => $aImageRepository->findAll(),
+            'p'             => $p,
+            'last_username' => $lastUsername,
+            'error'         => $error,
         ]);
     }
 

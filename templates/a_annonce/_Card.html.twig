@@ -1,6 +1,9 @@
+{% set height = '250px' %}
 <div class='Annonce-item'>
     <div class='Annonce-wrapper'>
-        {{ include('a_annonce/_ImageSlider.html.twig') }}
+        <div style="height: 250px;">
+            {{ include('a_annonce/_ImageSlider.html.twig') }}
+        </div>
         <div {{ react_component('Components/CardContent/CardContent',
             {   'Category': a_annonce.acategory.catnom ,
                 'Prix': a_annonce.aprix ,
