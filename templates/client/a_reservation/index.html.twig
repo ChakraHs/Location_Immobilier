@@ -26,7 +26,7 @@
                 <td>{{ a_reservation.id }}</td>
                 <td>{{ a_reservation.rdateentree ? a_reservation.rdateentree|date('Y-m-d') : '' }}</td>
                 <td>{{ a_reservation.rnombremois }}</td>
-                <td>{{ a_reservation.rcontrat }}</td>
+                <td><a href="{{ path('client_reservation_contrat',{'id': a_reservation.id}) }}" style="color:rgb(106, 106, 255); border-bottom: 1px solid rgb(106, 106, 255);">Voir</a></td>
                 {#<td>
                     <a href="{{ path('app_reservation_show', {'id': a_reservation.id}) }}">show</a>
                     <a href="{{ path('app_reservation_edit', {'id': a_reservation.id}) }}">edit</a>

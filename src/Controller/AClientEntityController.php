@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\AClient;
 use App\Form\AClient1Type;
+use App\model\infoReservation;
 use App\Repository\AClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,4 +76,5 @@ class AClientEntityController extends AbstractController
 
         return $this->redirectToRoute('app_a_client_entity_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
