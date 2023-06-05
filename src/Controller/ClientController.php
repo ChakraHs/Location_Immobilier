@@ -27,6 +27,10 @@ use Knp\Snappy\Pdf;
 
 use Symfony\Component\Mime\Address;
 
+use App\Form\InfoReservationType;
+use App\Form\PaiementFormType;
+use App\model\infoReservation;
+use App\model\PaiementForm;
 
 #[Route('/client')]
 class ClientController extends AbstractController
@@ -205,6 +209,48 @@ class ClientController extends AbstractController
     }
 
 
+    #[Route('/infoReservation', name: 'app_a_client_info_reservation')]
+    public function infoReservation(Request $request): Response
+    {
+        $infoReservation = new infoReservation();
+        $form = $this->createForm(InfoReservationType::class, $infoReservation);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid())
+        {
+            return $this->redirectToRoute('app_a_client_paiement', [
+                'infoReservation' => $infoReservation,
+                'page' => 1,
+            ]);
+            
+        }
+        return $this->render('client/infoReservation.html.twig', [
+            'form' => $form->createView(),
+            'page' => 1,
+        ]);
+    }
+
+
+    #[Route('/paiement', name: 'app_a_client_paiement')]
+    public function paiement(Request $request): Response
+    {
+        $infoPaiement = new PaiementForm();
+        $form = $this->createForm(PaiementFormType::class, $infoPaiement);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid())
+        {
+            return $this->render('client/index.html.twig', [
+                'infoReservation' => $infoPaiement,
+                'page' => 1,
+            ]);
+            
+        }
+        return $this->render('client/paiement.html.twig', [
+            'form' => $form->createView(),
+            'page' => 1,
+        ]);
+    }
 
 
 
@@ -216,10 +262,23 @@ class ClientController extends AbstractController
 
 
 
-    #[Route('/reservations/contrat/{id}' , name: 'client_bundel', methods: ['GET'])]
+
+
+    #[Route('/reservations/contrat/{id}' , name: 'client_reservation_contrat', methods: ['GET'])]
     public function generatePdfBundel(Request $request, AReservation $aReservation,Pdf $snappy): Response
     {
 
+
+        // Create a DateTime object from the initial date
+        $date = new \DateTime($aReservation->getRdateentree()->format('Y-m-d'));
+
+        // Add the number of months to the date
+        $date->modify('+' . $aReservation->getRnombremois() . ' months');
+
+        // Format the modified date as a string
+        $dateDeSortie = $date->format('Y-m-d');
+
+        $montant = $aReservation->getRnombremois()*$aReservation->getRannonce()->getAprix(); 
         $html = '
             <!DOCTYPE html>
             <html lang="en">
@@ -239,10 +298,9 @@ class ClientController extends AbstractController
                             background-color:rgb(255, 255, 255);
                             flex-direction: column;
                             ">
-                                <h3 style="margin:0px; margin-top: 10px; margin-bottom: 10px;">Bailleur</h3>
-                                <h4 style="margin:0px;">'.$aReservation->getRclient()->getCnom().' '.$aReservation->getRclient()->getCprenom().'</h4>
-                                <h4 style="margin:0px;">Adresse</h4>
-                                <h4 style="margin:0px;">Telephone</h4>
+                                <h3 style="margin:0px; margin-top: 10px; margin-bottom: 10px;">Locataire</h3>
+                                <h4 style="margin:0px;">Nom complet: '.$aReservation->getRclient()->getCnom().' '.$aReservation->getRclient()->getCprenom().'</h4>
+                                <h4 style="margin:0px;">Telephone: '.$aReservation->getRclient()->getCtele().'</h4>
                             </div>
                         </td>
                         <td style="width: 30%;border: 0px;"></td>
@@ -252,11 +310,11 @@ class ClientController extends AbstractController
                             background-color:rgb(255, 255, 255);
                             flex-direction: column;
                             ">
-                                <h3 style="margin:0px; margin-top: 10px; margin-bottom: 10px;">Locataire</h3>
+                                <h3 style="margin:0px; margin-top: 10px; margin-bottom: 10px;">Bailleur</h3>
                                 <h4 style="margin:0px;">'.$aReservation->getRannonce()->getAproprietaire()->getPnom().' '.$aReservation->getRannonce()->getAproprietaire()->getPprenom().'</h4>
-                                <h4 style="margin:0px;">Adresse</h4>
-                                <h4 style="margin:0px;">Telephone</h4>
-                                <font style="font-weight: bold; margin-top: 30px; margin-bottom: 20px;">
+                                <h4 style="margin:0px;">adresse</h4>
+                                <h4 style="margin:0px;margin-bottom:20px;">'.$aReservation->getRannonce()->getAproprietaire()->getPtele().'</h4>
+                                <font style="font-weight: bold;margin-bottom: 20px;">
                                     Fait a siteweb.com, Date
                                 </font>
                             </div>
@@ -274,7 +332,7 @@ class ClientController extends AbstractController
                     </tr>
                     <tr>
                         <td style="border: 0px;">
-                            Adresse
+                        Avenue '.$aReservation->getRannonce()->getArue().' '.$aReservation->getRannonce()->getAnumimmo().', '.$aReservation->getRannonce()->getAville().'
                         </td>
                     </tr>
                 </table>
@@ -287,7 +345,7 @@ class ClientController extends AbstractController
                     }
                     td, th{
                         border: 1px solid rgb(163, 163, 163);
-                        width: 25%;
+                        width: 20%;
                         padding: 20px;
                         margin:0px;
                     }
@@ -301,23 +359,22 @@ class ClientController extends AbstractController
                         <th class="t">Type</th>
                         <th class="t">Date d\'entree</th>
                         <th class="t">Date de sortie</th>
-                        <th class="t">Montant</th>
+                        <th class="t">Nombre de mois</th>
+                        <th class="t">Montant payé en (DH)</th>
                     </tr>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
+                        <td>'.$aReservation->getRannonce()->getAcategory().'</td>
+                        <td>'.$aReservation->getRdateentree()->format('Y-m-d').'</td>
+                        <td>'.$dateDeSortie.'</td>
+                        <td>'.$aReservation->getRnombremois().'</td>
+                        <td>'.$montant.'</td>
                     </tr>
                 </table>
 
                 <div style="width: 80%; display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
-                    <font style="font-weight: 400;">
-                        Date de paiement : Date
-                    </font>
                     </br>
                     <font style="font-weight: 400;">
-                        Methode de paiement : virement bancaire;
+                        Methode de paiement : virement bancaire
                     </font>
                 </div>
 

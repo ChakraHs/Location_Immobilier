@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+
+{{ form_errors(form.date) }}
+    <div class="hero-search-input margin-0" style="display:flex; flex-direction:row; gap:20px; align-items:center;">
+        <span style="width:150px;">Date d'entree</span>
+       {# {{ dump(form.date.vars.value['year']) }} #}
+        <input style="height:50px;" class="form-control form-control-sm" type="date" id='{{ form.date.vars.id }}' name='{{ form.date.vars.full_name }}' format="Y-m-d" value="{{ form.date.vars.value }}" min='{{ "now"|date("Y-m-d")}}' aria-label=".form-control-sm example">
+        {% do form.date.setRendered %}
+    </div>
+    {{ form_errors(form.nbMois) }}
+    <div class="hero-search-input margin-0" style="display:flex; flex-direction:row; gap:20px; align-items:center;">
+        <span style="width:150px;">Nombre de mois</span>
+        <input style="height:50px;" class="form-control form-control-sm" type="number" id='{{ form.nbMois.vars.id }}' name='{{ form.nbMois.vars.full_name }}' value='{{ form.nbMois.vars.value }}' aria-label=".form-control-sm example">
+        {% do form.nbMois.setRendered %}
+    </div>
+    <div style="display:flex; width:100%; justify-content:flex-end;">
+    <button class="btn" style="background-color:rgb(29, 28, 28); color:aliceblue; font-weight: 700;" type="submit">Je passe au paiement</button>
+    </div>
+    {# {{ dump(form) }} #}
+
+{{ form_end(form) }}

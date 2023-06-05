@@ -1,0 +1,72 @@
+{{ form_start(form) }}
+
+    <div class="first-row">
+            <div class="owner">
+                <h3>Nom complet</h3>
+                {{ form_errors(form.nomComplet) }}
+                <div class="input-field">
+                    <input type="text" id='{{ form.nomComplet.vars.id }}' name='{{ form.nomComplet.vars.full_name }}' value='{{ form.nomComplet.vars.value }}'>
+                    {% do form.nomComplet.setRendered %}
+                </div>
+            </div>
+            <div class="cvv">
+                <h3>CVV</h3>
+                {{ form_errors(form.CVV) }}
+                <div class="input-field">
+                    <input type="password" id='{{ form.CVV.vars.id }}' name='{{ form.CVV.vars.full_name }}' value='{{ form.CVV.vars.value }}'>
+                    {% do form.CVV.setRendered %}
+                </div>
+            </div>
+        </div>
+        <div class="second-row">
+            <div class="card-number">
+                <h3>Le numéro de la carte bancaire</h3>
+                {{ form_errors(form.num) }}
+                <div class="input-field">
+                    <input type="text" id='{{ form.num.vars.id }}' name='{{ form.num.vars.full_name }}' value='{{ form.num.vars.value }}'>
+                    {% do form.num.setRendered %}
+                </div>
+            </div>
+        </div>
+        <div class="third-row">
+            <h3>La date d'expiration</h3>
+            <div class="selection">
+                <div class="date">
+                    {{ form_errors(form.mois) }}
+                    <select id="months" id='{{ form.mois.vars.id }}' name='{{ form.mois.vars.full_name }}' value='{{ form.mois.vars.value }}'>
+                        <option value=1>Jan</option>
+                        <option value=2>Feb</option>
+                        <option value=3>Mar</option>
+                        <option value=4>Apr</option>
+                        <option value=5>May</option>
+                        <option value=6>Jun</option>
+                        <option value=7>Jul</option>
+                        <option value=8>Aug</option>
+                        <option value=9>Sep</option>
+                        <option value=10>Oct</option>
+                        <option value=11>Nov</option>
+                        <option value=12>Dec</option>
+                      </select>
+                      {% do form.mois.setRendered %}
+                      {{ form_errors(form.annee) }}
+                      <select id='{{ form.annee.vars.id }}' name='{{ form.annee.vars.full_name }}' value='{{ form.annee.vars.value }}'>
+                        <option value="2020">2023</option>
+                        <option value="2019">2024</option>
+                        <option value="2018">2025</option>
+                        <option value="2017">2026</option>
+                        <option value="2016">2027</option>
+                        <option value="2015">2028</option>
+                      </select>
+                      {% do form.annee.setRendered %}
+                </div>
+                <div class="cards">
+                    <img src="../../assets/img/mc.png" alt="">
+                    <img src="../../assets/img/vi.png" alt="">
+                    <img src="../../assets/img/pp.png" alt="">
+                </div>
+            </div> 
+        <div style="width:100%; display:flex; justify-content:flex-end;">   
+            <button type="submit">Confirmer</button>
+        </div>
+
+{{ form_end(form) }}
