@@ -46,7 +46,7 @@ class UserController extends AbstractController
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'page' => 3
+            'p' => 3
         ]);
     }
 
@@ -73,7 +73,7 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
-            'page' => 3,
+            'p' => 3,
         ]);
     }
 

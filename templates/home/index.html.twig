@@ -1,7 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
+{% block nav %}
+</div>
+</nav>
+<div class="modal fade" id="exampleModalSeConnecter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Welcome  </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post">
+                        <div class="modal-body">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
 
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                </div>
+                            {% endif %}
+                            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                            <label for="inputEmail">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                            <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+                            <span>
+                                vous n'avez pas de compte ? <a style="color: blue;text-decoration:underline;" href="{{ path('app_register') }}">S'inscrire</a>
+                            </span>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-lg btn-primary my-2" type="submit">
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block body %}
 <img src="../../assets/img/window-interior-decor.jpg" alt="" width="100%" style="position: absolute;top: -100px; z-index: -1;">
     <div class="container">

@@ -27,12 +27,12 @@
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                                 <li class="nav-item" style="display:flex;">
                                     <a class="nav-link p-2 p-lg-2" 
-                                    {% if page == 1 %} style="color: brown;" {% endif %}
+                                    {% if p == 1 %} style="color: brown;" {% endif %}
                                     href="{{ path('app_home') }}">Accueil</a>
                                 </li>
                                 <li class="nav-item position-relative" style="margin-right:10px;">
                                     <a class="nav-link p-2 p-lg-2" 
-                                    {% if page == 2 %} style="color: brown;" {% endif %}
+                                    {% if p == 2 %} style="color: brown;" {% endif %}
                                     href="{{ path('client_reservation_index') }}">Mes locations</a>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         {{ app.getUser().getAClient().getCreservations()|length}}
@@ -40,7 +40,7 @@
                                 </li>
                                 <li class="nav-item" style="margin-right:400px;">
                                     <a class="nav-link p-2 p-lg-2" 
-                                    {% if page == 3 %} style="color: brown;" {% endif %}
+                                    {% if p == 3 %} style="color: brown;" {% endif %}
                                     href="{{ path('app_user_show',{'id': app.getUser().getId()}) }}">Mon compte</a>
                                 </li>
                                 <li>
@@ -110,48 +110,11 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="modal fade" id="exampleModalSeConnecter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Welcome  </h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form method="post">
-                                        <div class="modal-body">
-                                            {% if error %}
-                                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                                            {% endif %}
-
-                                            {% if app.user %}
-                                                <div class="mb-3">
-                                                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                                                </div>
-                                            {% endif %}
-                                            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                                            <label for="inputEmail">Email</label>
-                                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-                                            <label for="inputPassword">Password</label>
-                                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                                            <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
-                                            <span>
-                                                vous n'avez pas de compte ? <a style="color: blue;text-decoration:underline;" href="{{ path('app_register') }}">S'inscrire</a>
-                                            </span>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-lg btn-primary my-2" type="submit">
-                                                Sign in
-                                            </button>
-                                        </div>
-                                    </form>
-                            </div>
-                        </div>
                     {% endif %}
                 {% endif %}
                 {% block nav %}{% endblock %}
             </div>
         </nav>
-        </div>
         {% for message in app.session.flashbag.get('succes') %}
             <div class='alert alert-success'>
                 {{ message }}

@@ -4,19 +4,38 @@
         <div style="height: 250px;">
             {{ include('a_annonce/_ImageSlider.html.twig') }}
         </div>
-        <div {{ react_component('Components/CardContent/CardContent',
-            {   'Category': a_annonce.acategory.catnom ,
-                'Prix': a_annonce.aprix ,
-                'Ville':a_annonce.aville ,
-                'Rue':a_annonce.arue ,
-                'NumImmo':a_annonce.anumimmo ,
-                'Bedrooms':a_annonce.bedrooms ,
-                'Bathrooms':a_annonce.bathrooms,
-                'Surface':a_annonce.Surface ,
-                'deleteUrl':deleteUrl,
-                'csrf_token_id':csrf_token_id,
-                'showUrl':showUrl,
-                'editUrl':editUrl,
-            }) }}></div>
+        {% if app.getUser %}
+            <a href='{{ path('app_annonce_show', {'id': a_annonce.id,'p':p}) }}' >
+            <div {{ react_component('Components/CardContent/CardContent',
+                {   'Category': a_annonce.acategory.catnom ,
+                    'Prix': a_annonce.aprix ,
+                    'Ville':a_annonce.aville ,
+                    'Rue':a_annonce.arue ,
+                    'NumImmo':a_annonce.anumimmo ,
+                    'Bedrooms':a_annonce.bedrooms ,
+                    'Bathrooms':a_annonce.bathrooms,
+                    'Surface':a_annonce.Surface ,
+                    'deleteUrl':deleteUrl,
+                    'csrf_token_id':csrf_token_id,
+                    'showUrl':showUrl,
+                    'editUrl':editUrl,
+                }) }}></div>
+            </a>
+        {% else %}
+            <div {{ react_component('Components/CardContent/CardContent',
+                {   'Category': a_annonce.acategory.catnom ,
+                    'Prix': a_annonce.aprix ,
+                    'Ville':a_annonce.aville ,
+                    'Rue':a_annonce.arue ,
+                    'NumImmo':a_annonce.anumimmo ,
+                    'Bedrooms':a_annonce.bedrooms ,
+                    'Bathrooms':a_annonce.bathrooms,
+                    'Surface':a_annonce.Surface ,
+                    'deleteUrl':deleteUrl,
+                    'csrf_token_id':csrf_token_id,
+                    'showUrl':showUrl,
+                    'editUrl':editUrl,
+                }) }}></div>
+        {% endif %}
     </div>
 </div>

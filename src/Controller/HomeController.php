@@ -31,6 +31,7 @@ class HomeController extends AbstractController
         int $nbre,
         AuthenticationUtils $authenticationUtils): Response
     {
+        if($this->getUser())
         if($this->getUser()->getRoles()[0]=='ROLE_PROPRIETAIRE')
         {
             return $this->redirectToRoute('app_annonce_accueil');
@@ -110,7 +111,7 @@ class HomeController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
             'a_reservations' => $reservationClient,
-            'page' => 1,
+            'p' => 1,
 
 
             'registrationForm' => $form->createView(),

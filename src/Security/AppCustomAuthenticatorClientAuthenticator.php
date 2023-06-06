@@ -20,8 +20,8 @@ class AppCustomAuthenticatorClientAuthenticator extends AbstractLoginFormAuthent
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE ='app_login'/* 'app_home' */;/* 'app_login' */
-    public const LOGIN_ROUTE2 ='app_home'/* 'app_home' */;/* 'app_login' */
+    public const LOGIN_ROUTE ='app_home'/* 'app_home' */;/* 'app_login' */
+    //public const LOGIN_ROUTE2 ='app_home'/* 'app_home' */;/* 'app_login' */
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
@@ -64,14 +64,6 @@ class AppCustomAuthenticatorClientAuthenticator extends AbstractLoginFormAuthent
 
     protected function getLoginUrl(Request $request): string
     {
-        $currentRoute = $request->attributes->get('_route');
-        if($currentRoute === 'app_home')
-        {
-            return $this->urlGenerator->generate(self::LOGIN_ROUTE2);
-        }
-        elseif($currentRoute === 'app_login')
-        {
-            return $this->urlGenerator->generate(self::LOGIN_ROUTE);
-        }
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }

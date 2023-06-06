@@ -61,7 +61,7 @@ class ClientController extends AbstractController
         return $this->renderForm('a_client_entity/edit.html.twig', [
             'a_client' => $aClient,
             'form' => $form,
-            'page'=> 3,
+            'p'=> 3,
         ]);
     }
 
@@ -132,7 +132,7 @@ class ClientController extends AbstractController
             'a_reservations' => $this->getUser()->getAClient()->getCreservations(),
             'a_annonces'=> $aAnnonceRepository->findAll(),
             'user'=>$this->getUser(),
-            'page' => 2,
+            'p' => 2,
         ]);
     }
 
@@ -220,13 +220,13 @@ class ClientController extends AbstractController
         {
             return $this->redirectToRoute('app_a_client_paiement', [
                 'infoReservation' => $infoReservation,
-                'page' => 1,
+                'p' => 1,
             ]);
             
         }
         return $this->render('client/infoReservation.html.twig', [
             'form' => $form->createView(),
-            'page' => 1,
+            'p' => 1,
         ]);
     }
 
@@ -242,13 +242,13 @@ class ClientController extends AbstractController
         {
             return $this->render('client/index.html.twig', [
                 'infoReservation' => $infoPaiement,
-                'page' => 1,
+                'p' => 1,
             ]);
             
         }
         return $this->render('client/paiement.html.twig', [
             'form' => $form->createView(),
-            'page' => 1,
+            'p' => 1,
         ]);
     }
 

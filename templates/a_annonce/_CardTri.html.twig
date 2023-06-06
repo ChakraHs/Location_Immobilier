@@ -1,0 +1,24 @@
+{% set height = '250px' %}
+<div class='Annonce-item-Secondaire'>
+    <div class='Annonce-wrapper-Secondaire'>
+        <div style="width: 350px;">
+            {{ include('a_annonce/_ImageSlider.html.twig') }}
+        </div>
+        {# <a style="width:100%;height:100%;" href="{{ path('app_annonce_show', {'id': a_annonce.id}) }}"> #}
+            <div class="component-Secondaire" {{ react_component('Components/CardContentTri/CardContentTri',
+                {   'Category': a_annonce.acategory.catnom ,
+                    'Prix': a_annonce.aprix ,
+                    'Ville':a_annonce.aville ,
+                    'Rue':a_annonce.arue ,
+                    'NumImmo':a_annonce.anumimmo ,
+                    'Bedrooms':a_annonce.bedrooms ,
+                    'Bathrooms':a_annonce.bathrooms,
+                    'Surface':a_annonce.Surface ,
+                    'deleteUrl':deleteUrl,
+                    'csrf_token_id':csrf_token_id,
+                    'showUrl':showUrl,
+                    'editUrl':editUrl,
+                }) }}></div>
+        {# </a> #}
+    </div>
+</div>
