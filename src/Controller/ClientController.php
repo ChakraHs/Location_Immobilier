@@ -209,8 +209,8 @@ class ClientController extends AbstractController
     }
 
 
-    #[Route('/infoReservation', name: 'app_a_client_info_reservation')]
-    public function infoReservation(Request $request): Response
+    #[Route('/infoReservation/{id<\d+>}', name: 'app_a_client_info_reservation')]
+    public function infoReservation(Request $request , $id): Response
     {
         $infoReservation = new infoReservation();
         $form = $this->createForm(InfoReservationType::class, $infoReservation);
@@ -221,18 +221,20 @@ class ClientController extends AbstractController
             return $this->redirectToRoute('app_a_client_paiement', [
                 'infoReservation' => $infoReservation,
                 'p' => 1,
+                'id'=> $id,
             ]);
             
         }
         return $this->render('client/infoReservation.html.twig', [
             'form' => $form->createView(),
             'p' => 1,
+            'id'=> $id,
         ]);
     }
 
 
-    #[Route('/paiement', name: 'app_a_client_paiement')]
-    public function paiement(Request $request): Response
+    #[Route('/paiement/{id<\d+>}', name: 'app_a_client_paiement')]
+    public function paiement(Request $request, $id): Response
     {
         $infoPaiement = new PaiementForm();
         $form = $this->createForm(PaiementFormType::class, $infoPaiement);
@@ -243,12 +245,14 @@ class ClientController extends AbstractController
             return $this->render('client/index.html.twig', [
                 'infoReservation' => $infoPaiement,
                 'p' => 1,
+                'id'=> $id,
             ]);
             
         }
         return $this->render('client/paiement.html.twig', [
             'form' => $form->createView(),
             'p' => 1,
+            'id'=> $id,
         ]);
     }
 

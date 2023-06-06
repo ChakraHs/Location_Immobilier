@@ -82,10 +82,15 @@
                                         {{ locataire_Annonce|length}}
                                     </span>
                                 </li>
-                                <li class="nav-item" style="margin-right:400px;">
+                                <li class="nav-item" style="margin-right:10px;">
                                     <a class="nav-link p-2 p-lg-2" 
                                     {% if p == 3 %} style="color: brown;" {% endif %}
                                     href="{{ path('app_user_show',{'id': app.getUser().getId()}) }}">Mon compte</a>
+                                </li>
+                                <li class="nav-item" style="margin-right:200px;">
+                                    <a class="nav-link p-2 p-lg-2" 
+                                    {% if p == 4 %} style="color: brown;" {% endif %}
+                                    href="{{ path('app_annonce_new') }}">Ajoute Annonce</a>
                                 </li>
                                 <li>
                                     <div class="hero-search-button!" style="background-color:transparent; margin-top:0px;">

@@ -32,7 +32,7 @@ class AAnnonceController extends AbstractController
         $nbrePage = ceil($nbAnnonce/$nbre);
         return $this->render('a_annonce/index.html.twig', [
             // 'a_annonces' => $aAnnonceRepository->findAll(),
-            'a_annonces'    => $aAnnonceRepository->findBy([],[],$nbre,($page-1)*$nbre),
+            'a_annonces'    => $aAnnonceRepository->findBy(['aetat'=>'false'],[],$nbre,($page-1)*$nbre),
             'categorys'     => $aCategoryRepository->findAll(),
             'AImages'       => $aImageRepository->findAll(),
             'page'          => $page,
@@ -94,7 +94,7 @@ class AAnnonceController extends AbstractController
         $form = $this->createForm(AAnnonceType::class, $aAnnonce);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() ) {
+        if ($form->isSubmitted()  ) {
             $images = $form->get('aImages')->get('__name__')->get('image')->getData() ;
             if ($images) {
                 $directory= $this->getParameter('Annonce_image_directory');
@@ -114,12 +114,13 @@ class AAnnonceController extends AbstractController
             $this->addFlash('succes',"l'annonce a été ajouté avec succés");
 
             //$aAnnonceRepository->save($aAnnonce, true);
-            return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_accueil', ['p'=>1], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('a_annonce/new.html.twig', [
             'a_annonce' => $aAnnonce,
             'form' => $form,
+            'p'=>4,
         ]);
     }
 

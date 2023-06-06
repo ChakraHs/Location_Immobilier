@@ -6,6 +6,8 @@ use App\Repository\AAnnonceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: AAnnonceRepository::class)]
 class AAnnonce
@@ -16,15 +18,19 @@ class AAnnonce
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"le champ Prix est vide, il doit etre rempli.")]
     private ?float $aprix = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le champ Ville est vide, il doit etre rempli.")]
     private ?string $aville = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le champ Rue est vide, il doit etre rempli.")]
     private ?string $arue = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"le champ de Numero d'immeuble est vide, il doit etre rempli.")]
     private ?int $anumimmo = null;
 
     #[ORM\Column(length: 255)]
@@ -38,22 +44,27 @@ class AAnnonce
     private ?AProprietaire $aproprietaire = null;
 
     #[ORM\OneToMany(mappedBy: 'iannonce', targetEntity: AImage::class, cascade: array('persist','remove'))]
+    #[Assert\NotBlank(message:"le champ de l'image est vide, il doit etre rempli.")]
     private Collection $aImages;
 
     #[ORM\ManyToOne(inversedBy: 'cannonces')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message:"le champ Category est vide, il doit etre rempli.")]
     private ?ACategory $acategory = null;
 
     #[ORM\OneToMany(mappedBy: 'rannonce', targetEntity: AReservation::class)]
     private Collection $aReservations;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"le champ Bedrooms est vide, il doit etre rempli.")]
     private ?int $bedrooms = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"le champ bathrooms est vide, il doit etre rempli.")]
     private ?int $bathrooms = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"le champ Surface est vide, il doit etre rempli.")]
     private ?int $Surface = null;
 
     public function __construct()

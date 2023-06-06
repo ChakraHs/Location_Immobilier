@@ -3,33 +3,64 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>{{ user.AClient.cnom ~' '~ user.AClient.cprenom  }}</h1>
+    {% if app.user %}
+        {% if app.getUser().getRoles()[0] == "ROLE_CLIENT" %}
+            <h1>{{ user.AClient.cnom ~' '~ user.AClient.cprenom  }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.AClient.cnom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.AClient.cprenom }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ user.AClient.ctele }}</td>
-            </tr>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ user.AClient.cnom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prenom</th>
+                        <td>{{ user.AClient.cprenom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Telephone</th>
+                        <td>{{ user.AClient.ctele }}</td>
+                    </tr>
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+        {% elseif app.getUser().getRoles()[0] == "ROLE_PROPRIETAIRE" %}
+            <h1>{{ user.aproprietaire.pnom ~' '~ user.aproprietaire.pprenom  }}</h1>
 
-    {# <a href="{{ path('app_user_index') }}">back to list</a> #}
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ user.aproprietaire.pnom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prenom</th>
+                        <td>{{ user.aproprietaire.pprenom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Telephone</th>
+                        <td>{{ user.aproprietaire.ptele }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cin</th>
+                        <td>{{ user.aproprietaire.pcin }}</td>
+                    </tr>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                </tbody>
+            </table>
+
+    <a href="{{ path('app_user_editpro', {'id': user.id}) }}">Modifier</a>
+        {% endif %}
+    {% endif %}
 
     {# {{ include('user/_delete_form.html.twig') }} #}
 {% endblock %}

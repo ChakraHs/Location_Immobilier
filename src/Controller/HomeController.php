@@ -93,6 +93,7 @@ class HomeController extends AbstractController
                 'error'         => $error,
                 'registrationForm' => $form->createView(),
                 'searchdata'=>$searchdata,
+                'p' => 1,
             ]);
         }
         $nbAnnonce = $aAnnonceRepository->count([]);

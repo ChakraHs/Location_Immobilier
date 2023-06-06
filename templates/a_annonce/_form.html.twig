@@ -31,7 +31,10 @@
         {% do form.aImages.setRendered %}
     </div>
     <div class="hero-search-input margin-0">
-        {{ form_widget(form.aproprietaire) }}
+        {# {{ form_widget(form.aproprietaire) }} #}
+        {# {{ dump(form.aproprietaire,app.user.aproprietaire) }} #}
+        <input type='hidden' id='{{ form.aproprietaire.vars.id }}' name='{{ form.aproprietaire.vars.full_name }}' value='{{ app.user.aproprietaire }}'>
+        {% do form.aproprietaire.setRendered %}
     </div>
     <div class="hero-search-3">
         <div class="hero-search-input second-search margin-1">

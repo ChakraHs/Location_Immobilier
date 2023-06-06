@@ -118,7 +118,7 @@
                     {% set showUrl = path('app_annonce_show', {'id': a_annonce.id}) %}
                     {% set editUrl = path('app_annonce_edit', {'id': a_annonce.id}) %}
                     {% set csrf_token_id = csrf_token('delete' ~ a_annonce.id)  %}
-                    {{ include('a_annonce/_CardSecondaire.html.twig') }}
+                    {{ include('a_annonce/_CardTri.html.twig') }}
                 {% else %}
                     <tr>
                         <td colspan="8">no records found</td>

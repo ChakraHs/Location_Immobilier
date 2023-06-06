@@ -3,29 +3,55 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <div class='container-fluid ' >
-    <div 
-                    class="hero1" 
-                    style=' display: flex;
-                            flex-direction: column;
-                            padding: var(--padding-primary);
-                            align-items: center;
-                            justify-content: center;
-                            font-family: var(--font-family-primary);
-                            width:auto;
-                            min-height:80vh;
-                            '  >
-        <div class="card">
-            <div class="card-header">
-                Modifier compte
+    {% if app.user %}
+        {% if app.getUser().getRoles()[0] == "ROLE_CLIENT" %}
+            <div class='container-fluid ' >
+            <div 
+                            class="hero1" 
+                            style=' display: flex;
+                                    flex-direction: column;
+                                    padding: var(--padding-primary);
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-family: var(--font-family-primary);
+                                    width:auto;
+                                    min-height:80vh;
+                                    '  >
+                <div class="card">
+                    <div class="card-header">
+                        Modifier compte
+                    </div>
+                    <div class="card-body">    
+                        {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                </div>
+                </div>
             </div>
-            <div class="card-body">    
-                {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+        {% elseif app.getUser().getRoles()[0] == "ROLE_PROPRIETAIRE" %}
+            <div class='container-fluid ' >
+            <div 
+                            class="hero1" 
+                            style=' display: flex;
+                                    flex-direction: column;
+                                    padding: var(--padding-primary);
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-family: var(--font-family-primary);
+                                    width:auto;
+                                    min-height:80vh;
+                                    '  >
+                <div class="card">
+                    <div class="card-header">
+                        Modifier compte
+                    </div>
+                    <div class="card-body">    
+                        {{ include('user/_formProprie.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                </div>
+                </div>
             </div>
-        </div>
-        </div>
-    </div>
-
+        {% endif %}
+    {% endif %}
     {# <a href="{{ path('app_user_index') }}">back to list</a> #}
 
     {# {{ include('user/_delete_form.html.twig') }} #}
