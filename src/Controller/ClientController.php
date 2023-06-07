@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+use App\Entity\AAnnonce;
 use App\Entity\AClient;
 use App\Form\AClient1Type;
 use App\Repository\AClientRepository;
@@ -31,6 +31,7 @@ use App\Form\InfoReservationType;
 use App\Form\PaiementFormType;
 use App\model\infoReservation;
 use App\model\PaiementForm;
+use App\Repository\AnnonceRepository;
 
 #[Route('/client')]
 class ClientController extends AbstractController
@@ -219,9 +220,11 @@ class ClientController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             return $this->redirectToRoute('app_a_client_paiement', [
-                'infoReservation' => $infoReservation,
                 'p' => 1,
                 'id'=> $id,
+                'infoReservationNbmois' => $infoReservation->getNbmois(),
+                'infoReservationDate' => $infoReservation->getDate()->format('Y-m-d'),
+                'annonce' => $id,
             ]);
             
         }
@@ -233,19 +236,23 @@ class ClientController extends AbstractController
     }
 
 
-    #[Route('/paiement/{id<\d+>}', name: 'app_a_client_paiement')]
-    public function paiement(Request $request, $id): Response
+    #[Route('/paiement/{annonce}', name: 'app_a_client_paiement')]
+    public function paiement(Request $request, AAnnonce $annonce): Response
     {
         $infoPaiement = new PaiementForm();
         $form = $this->createForm(PaiementFormType::class, $infoPaiement);
         $form->handleRequest($request);
+        $infoReservationDate=$request->query->get('infoReservationDate');
+        $infoReservationNbmois=$request->query->get('infoReservationNbmois');
+        $id=$request->query->get('id');
         
         if($form->isSubmitted() && $form->isValid())
         {
-            return $this->render('client/index.html.twig', [
-                'infoReservation' => $infoPaiement,
+            return $this->redirectToRoute('app_resultat_reservation', [
                 'p' => 1,
-                'id'=> $id,
+                'annonce'=> $id,
+                'infoReservationNbmois' => $infoReservationNbmois,
+                'infoReservationDate' => $infoReservationDate,
             ]);
             
         }
@@ -253,6 +260,7 @@ class ClientController extends AbstractController
             'form' => $form->createView(),
             'p' => 1,
             'id'=> $id,
+            'prix' => $annonce->getAprix()*$infoReservationNbmois,
         ]);
     }
 

@@ -42,7 +42,8 @@
                         
                     {% else %}
                         <div class="d-grid gap-2 col-2 mx-auto">
-                            <a href="{{ path('app_resultat_reservation', {'annonce': a_annonce.id}) }}" class="btn btn-primary text-center">Reserver</a>
+                            {# <a href="{{ path('app_resultat_reservation', {'annonce': a_annonce.id}) }}" class="btn btn-primary text-center">Reserver</a> #}
+                            <a href="{{ path('app_a_client_info_reservation', {'id': a_annonce.id}) }}" class="btn btn-primary text-center">Reserver</a>
                         </div>
                     {% endif %}
                 </div>

@@ -32,10 +32,14 @@ class ReserverController extends AbstractController
         if(!$this->getUser()){
             return $this->redirectToRoute('app_home');
         }
+
+        $infoReservationDate=$request->query->get('infoReservationDate');
+        $infoReservationNbmois=$request->query->get('infoReservationNbmois');
+        
         $aReservation = new AReservation();
         $aReservation->setRannonce($annonce);
-        $aReservation->setRdateentree(new \DateTime());
-        $aReservation->setRnombremois(3);
+        $aReservation->setRdateentree(new \DateTime($infoReservationDate));
+        $aReservation->setRnombremois($infoReservationNbmois);
         $aReservation->setRcontrat("processing...");
         $aReservation->setRclient($this->getUser()->getAClient());
         //dd($this->getUser()->getAClient()->getId());
